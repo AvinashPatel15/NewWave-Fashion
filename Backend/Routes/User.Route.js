@@ -2,11 +2,15 @@ const express = require("express");
 require("dotenv").config();
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 const { UserModel } = require("../Models/User.Model");
 const { UserAuth } = require("../Middlewares/UserAuth.Middleware");
 const { body, validationResult } = require("express-validator");
+const { TokenModel } = require("../Models/Token.Model");
+const sendEmail = require("../Utils/sendEmail");
 
 const userRouter = express.Router();
+userRouter.use(express.json());
 
 /* For New User */
 
@@ -84,7 +88,17 @@ userRouter.post(
               isVerified,
             });
             ValidatorUser = await user.save();
-            res.send({ meassage: "User Register Successfully!" });
+
+            const token = await new TokenModel({
+              userID: user._id,
+              token: crypto.randomBytes(32).toString("hex"),
+            }).save();
+
+            const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+            await sendEmail(user.email, "Verify Email", url, user.first_name);
+            res.send({
+              message: "Please Check Your Mail To Verify Your Account!",
+            });
           }
         });
       }
@@ -94,7 +108,29 @@ userRouter.post(
   }
 );
 
-/** For Login */
+/** For Verify Email With The Link */
+
+userRouter.get("/:id/verify/:token", async (req, res) => {
+  try {
+    const user = await UserModel.findOne({ _id: req.params.id });
+    if (!user) return res.status(401).send({ message: "Invalid Link" });
+
+    const token = await TokenModel.findOne({
+      userID: user._id,
+      token: req.params.token,
+    });
+    if (!token) return res.status(401).send({ message: "Invalid Link" });
+
+    await UserModel.findByIdAndUpdate({ _id: user._id }, { isVerified: true });
+    await TokenModel.remove();
+
+    res.send({ message: "Email Verified Successfully" });
+  } catch (error) {
+    console.log({ message: "Internal Server Error", error });
+  }
+});
+
+/* For Login */
 
 userRouter.post(
   "/login",
@@ -117,7 +153,28 @@ userRouter.post(
         /* Compare My Hash Password With The Help Of Bcrypt.compare */
         bcrypt.compare(password, user.password, async (err, result) => {
           if (result) {
-            /** Generate The Token With Help Of JWT It Gives You One Token When Ever User Is Login */
+            /** And we are checking that is the user is not verify then we are sending another mail for verified */
+            if (!user.isVerified) {
+              let token = await TokenModel.findOne({ userID: user._id });
+              if (!token) {
+                token = await new TokenModel({
+                  userID: user._id,
+                  token: crypto.randomBytes(32).toString("hex"),
+                }).save();
+
+                const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+                await sendEmail(
+                  user.email,
+                  "Verify Email",
+                  url,
+                  user.first_name
+                );
+              }
+              return res.status(401).send({
+                message: "Before Login Please Verify Your Account!",
+              });
+            }
+            /* Generate The Token With Help Of JWT It Gives You One Token When Ever User Is Login */
             const token = jwt.sign({ userID: user._id }, process.env.JWTKey);
 
             res.send({
@@ -169,7 +226,7 @@ userRouter.get("/", UserAuth, async (req, res) => {
 
 /* For Deleting The User Data And This Route Is Only Work For Admin Other People's Can't Use This Route */
 
-userRouter.delete("/delete/:id", async (req, res) => {
+userRouter.delete("/delete/:id", UserAuth, async (req, res) => {
   const ID = req.params.id;
   try {
     await UserModel.findByIdAndDelete({ _id: ID });
