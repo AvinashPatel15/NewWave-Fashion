@@ -1,10 +1,10 @@
 import "./App.css";
-import Error from "./Components/404-Error/Error";
+import AllRoutes from "./Routes/AllRoutes";
 
 function App() {
   return (
     <>
-      <Error />
+      <AllRoutes />
     </>
   );
 }

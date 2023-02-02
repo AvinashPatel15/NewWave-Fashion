@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import success from "../../../assets/success.png";
+import success from "../../Assets/success.png";
 import styles from "./EmailVerify.module.css";
 import { Box } from "@chakra-ui/react";
 import Error from "../404-Error/Error";
@@ -15,7 +15,6 @@ const EmailVerify = () => {
       try {
         const url = `http://localhost:8080/users/${param.id}/verify/${param.token}`;
         const { data } = await axios.get(url);
-        console.log(data);
         setValidUrl(true);
       } catch (error) {
         console.log(error);
