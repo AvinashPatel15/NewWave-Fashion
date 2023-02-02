@@ -10,7 +10,6 @@ const { TokenModel } = require("../Models/Token.Model");
 const sendEmail = require("../Utils/sendEmail");
 
 const userRouter = express.Router();
-userRouter.use(express.json());
 
 /* For New User */
 
