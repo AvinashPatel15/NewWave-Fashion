@@ -11,7 +11,7 @@ const sendEmail = require("../Utils/sendEmail");
 
 const userRouter = express.Router();
 
-/* For New User */
+/** For New User */
 
 userRouter.post(
   "/register",
@@ -36,7 +36,7 @@ userRouter.post(
   ],
   async (req, res) => {
     try {
-      /* Checking All The Fields Are Validate Or Not */
+      /** Checking All The Fields Are Validate Or Not */
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(401).json({ message: errors.array()[0].msg });
@@ -58,14 +58,14 @@ userRouter.post(
         isVerified,
       } = req.body;
 
-      /* Validate User */
+      /** Validate User */
       let ValidatorUser = await UserModel.findOne({ email: email });
       if (ValidatorUser) {
         res.status(401).send({
           message: "Please Enter Another Email This Email Is Already Exist!",
         });
       } else {
-        /* Protect The User Password With The Help Of Bcrypt It Convert Your Password To Hash Password Which Is Stored In Our DataBase */
+        /** Protect The User Password With The Help Of Bcrypt It Convert Your Password To Hash Password Which Is Stored In Our DataBase */
         bcrypt.hash(password, 8, async (err, hash_password) => {
           if (err) {
             console.log(err);
@@ -129,11 +129,11 @@ userRouter.get("/:id/verify/:token", async (req, res) => {
   }
 });
 
-/* For Login */
+/** For Login */
 
 userRouter.post(
   "/login",
-  /* Checking Required Fields */
+  /** Checking Required Fields */
   [
     body("email", "Enter A Valid Email").isEmail().not(),
     body("password", "Enter A Correct Password").not().isEmpty(),
@@ -141,15 +141,15 @@ userRouter.post(
   async (req, res) => {
     const { email, password } = req.body;
     try {
-      /* Checking Required Fields */
+      /** Checking Required Fields */
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
         return res.status(401).send({ message: errors.array()[0].msg });
       }
-      /* We Are Checking Your Mail Is In DataBase Or Not */
+      /** We Are Checking Your Mail Is In DataBase Or Not */
       const user = await UserModel.findOne({ email });
       if (user) {
-        /* Compare My Hash Password With The Help Of Bcrypt.compare */
+        /** Compare My Hash Password With The Help Of Bcrypt.compare */
         bcrypt.compare(password, user.password, async (err, result) => {
           if (result) {
             /** And we are checking that is the user is not verify then we are sending another mail for verified */
@@ -173,7 +173,7 @@ userRouter.post(
                 message: "Before Login Please Verify Your Account!",
               });
             }
-            /* Generate The Token With Help Of JWT It Gives You One Token When Ever User Is Login */
+            /** Generate The Token With Help Of JWT It Gives You One Token When Ever User Is Login */
             const token = jwt.sign({ userID: user._id }, process.env.JWTKey);
 
             res.send({
@@ -223,7 +223,7 @@ userRouter.get("/", UserAuth, async (req, res) => {
   }
 });
 
-/* For Deleting The User Data And This Route Is Only Work For Admin Other People's Can't Use This Route */
+/** For Deleting The User Data And This Route Is Only Work For Admin Other People's Can't Use This Route */
 
 userRouter.delete("/delete/:id", UserAuth, async (req, res) => {
   const ID = req.params.id;
