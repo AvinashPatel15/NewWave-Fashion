@@ -13,7 +13,7 @@ const userSchema = mongoose.Schema(
     state: { type: String, required: true },
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
-    isUser: { type: Boolean, default: false },
+    isUser: { type: Boolean, default: true },
     isAdmin: { type: Boolean, default: false },
     isVerified: { type: Boolean, default: false },
   },

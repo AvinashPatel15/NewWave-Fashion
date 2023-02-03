@@ -3,9 +3,9 @@ require("dotenv").config();
 
 const UserAuth = (req, res, next) => {
   const token = req.headers.authorization || null;
-  /* Checking Token Is There Or Not */
+  /** Checking Token Is There Or Not */
   if (token) {
-    /* Verify Our Token With The Help Of jwt.verify */
+    /** Verify Our Token With The Help Of jwt.verify */
     jwt.verify(token, process.env.JWTKey, (err, decoded) => {
       if (err) {
         res

@@ -1,4 +1,5 @@
 const express = require("express");
+const { UserAuth } = require("../Middlewares/UserAuth.Middleware");
 const { ProductModel } = require("../Models/Product.Model");
 require("dotenv").config();
 
@@ -18,7 +19,7 @@ productRouter.get("/", async (req, res) => {
 
 /** For Post A Product */
 
-productRouter.post("/post", async (req, res) => {
+productRouter.post("/post", UserAuth, async (req, res) => {
   const data = req.body;
   data.userID = req.userID;
   try {
@@ -32,7 +33,7 @@ productRouter.post("/post", async (req, res) => {
 
 /** For Update A Product Using ID*/
 
-productRouter.patch("/update/:id", async (req, res) => {
+productRouter.patch("/update/:id", UserAuth, async (req, res) => {
   const ID = req.params.id;
   const payload = req.body;
   try {
@@ -45,7 +46,7 @@ productRouter.patch("/update/:id", async (req, res) => {
 
 /** For Delete A Product Using ID*/
 
-productRouter.delete("/delete/:id", async (req, res) => {
+productRouter.delete("/delete/:id", UserAuth, async (req, res) => {
   const ID = req.params.id;
   try {
     await ProductModel.findByIdAndDelete({ _id: ID });

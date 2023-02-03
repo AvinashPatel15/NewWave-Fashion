@@ -19,7 +19,7 @@ cartRouter.get("/", UserAuth, async (req, res) => {
     }
   } catch (error) {
     res
-      .status(500)
+      .status(401)
       .send({ message: "Something went wrong in cart Get", error });
   }
 });
@@ -57,7 +57,7 @@ cartRouter.post("/post/:productID", UserAuth, async (req, res) => {
  * And If The Count Is One Then Item Was Removed From Cart
  */
 
-cartRouter.patch("/remove/:id", async (req, res) => {
+cartRouter.patch("/remove/:id", UserAuth, async (req, res) => {
   const id = req.params.id;
   try {
     let isProduct = await CartModel.findOne({ _id: id });
@@ -83,7 +83,7 @@ cartRouter.patch("/remove/:id", async (req, res) => {
  * ? `/carts/delete/${id}`
  */
 
-cartRouter.delete("/delete/:id", async (req, res) => {
+cartRouter.delete("/delete/:id", UserAuth, async (req, res) => {
   const id = req.params.id;
   try {
     await CartModel.findByIdAndDelete({ _id: id });
