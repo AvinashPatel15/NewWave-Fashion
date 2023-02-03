@@ -70,7 +70,7 @@ userRouter.post(
           if (err) {
             console.log(err);
           } else {
-            const user = new UserModel({
+            const user = await UserModel.create({
               first_name,
               last_name,
               age,
@@ -86,7 +86,6 @@ userRouter.post(
               isAdmin,
               isVerified,
             });
-            ValidatorUser = await user.save();
 
             const token = await new TokenModel({
               userID: user._id,
