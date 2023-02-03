@@ -48,7 +48,7 @@ cartRouter.post("/post/:productID", UserAuth, async (req, res) => {
   } catch (error) {
     res
       .status(401)
-      .send({ message: "Something Went Wrong In The Cart Update", error });
+      .send({ message: "Something Went Wrong In The Cart Section", error });
   }
 });
 

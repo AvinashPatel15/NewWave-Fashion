@@ -6,6 +6,7 @@ const { userRouter } = require("./Routes/User.Route");
 const { productRouter } = require("./Routes/Product.Route");
 const { cartRouter } = require("./Routes/Cart.Route");
 const { purchaseHistoryRouter } = require("./Routes/PuchaseHistory.Route");
+const { wishlistRouter } = require("./Routes/Wishlist.Route");
 
 const app = express();
 const port = process.env.PORT || 8080;
@@ -21,14 +22,17 @@ app.get("/", (req, res) => {
 /** User Router */
 app.use("/users", userRouter);
 
-/* Product Router */
+/** Product Router */
 app.use("/products", productRouter);
 
-/* Cart Router */
+/** Cart Router */
 app.use("/carts", cartRouter);
 
-/* PurchaseHistory Router */
+/** PurchaseHistory Router */
 app.use("/purchasehistory", purchaseHistoryRouter);
+
+/** PurchaseHistory Router */
+app.use("/wishlists", wishlistRouter);
 
 /** For Listening Port */
 app.listen(port, async () => {
