@@ -16,7 +16,7 @@ app.use(cors());
 
 /** Welcome Page */
 app.get("/", (req, res) => {
-  res.send("Welcome To Local Mart Server");
+  res.send("Welcome To NewWave Fashion Server");
 });
 
 /** User Router */
