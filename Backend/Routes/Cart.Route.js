@@ -44,7 +44,7 @@ cartRouter.post("/post/:productID", UserAuth, async (req, res) => {
       await CartModel.create({ productID, userID });
       res.send({ message: "Item Added To The Cart Successfully" });
     }
-    res.send({ message: "Item Updated In Cart Successfully" });
+    // res.send({ message: "Item Updated In Cart Successfully" });
   } catch (error) {
     res
       .status(401)
@@ -71,7 +71,7 @@ cartRouter.patch("/remove/:id", UserAuth, async (req, res) => {
       await CartModel.findByIdAndDelete({ _id: id });
       res.send({ message: "Item Deleted From The Cart Successfully" });
     }
-    res.send({ message: "Item Decreased From The Cart Successfully" });
+    // res.send({ message: "Item Decreased From The Cart Successfully" });
   } catch (error) {
     res
       .status(500)

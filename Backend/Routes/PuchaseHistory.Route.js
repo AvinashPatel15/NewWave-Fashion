@@ -29,10 +29,11 @@ purchaseHistoryRouter.post("/post", UserAuth, async (req, res) => {
     const cart = await CartModel.find({ userID });
     if (cart.length === 0) {
       res.status(401).send({ message: "Your Cart Is Empty" });
+    } else {
+      await PurchaseHistoryModel.insertMany(cart);
+      await CartModel.deleteMany({ userID });
+      res.send({ message: "Successfully Purchase" });
     }
-    const ph = await PurchaseHistoryModel.insertMany(cart);
-    const deleteCart = await CartModel.deleteMany({ userID });
-    res.send({ message: "Successfully Purchase" });
   } catch (error) {
     res
       .status(401)
