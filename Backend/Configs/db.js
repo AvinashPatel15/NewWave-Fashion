@@ -5,7 +5,7 @@ const MongoDB_URL = process.env.DATABASE_URL;
 
 const connection = () => {
   mongoose
-    .connect(MongoDB_URL)
+    .connect(MongoDB_URL, { useNewUrlParser: true, useUnifiedTopology: true })
     .then(() => {
       console.log({ message: "Connection Successfully!" });
     })
@@ -13,6 +13,8 @@ const connection = () => {
       console.log({ message: "Connection Error!", error });
     });
 };
+
+mongoose.set("strictQuery", false);
 
 module.exports = {
   connection,
