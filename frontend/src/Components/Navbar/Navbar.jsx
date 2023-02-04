@@ -102,7 +102,7 @@ const Navbar = () => {
           >
             <InputGroup
               size={{ base: "sm", md: "md" }}
-              marginRight={{ base: 1, sm: 2, md: 5 }}
+              marginRight={{ base: 3, sm: 5, md: 7 }}
               marginTop={1.5}
               border={"1px solid grey"}
               borderRadius={5}
@@ -119,15 +119,30 @@ const Navbar = () => {
               </InputRightElement>
             </InputGroup>
 
-            <Box display={{ base: "none", lg: "flex" }} gap={2}>
+            <Box display={{ base: "none", lg: "flex" }} gap={4}>
               <Link to="/wishlist">
                 <Box>
-                  <AiOutlineHeart size={30} />
+                  <AiOutlineHeart size={35} />
                 </Box>
               </Link>
               <Link to="/cart">
-                <Box marginRight={{ base: 1, sm: 2, md: 3 }}>
-                  <AiOutlineShoppingCart size={30} />
+                <Box
+                  marginRight={{ base: 1, sm: 2, md: 5 }}
+                  position={"relative"}
+                >
+                  <AiOutlineShoppingCart size={35} />
+                  <Text
+                    position={"absolute"}
+                    top={-1}
+                    right={1}
+                    fontSize={"12px"}
+                    fontWeight={"bold"}
+                    backgroundColor={"purple.200"}
+                    borderRadius={"full"}
+                    px={"2px"}
+                  >
+                    {10}
+                  </Text>
                 </Box>
               </Link>
             </Box>
@@ -139,6 +154,7 @@ const Navbar = () => {
                 variant={"link"}
                 cursor={"pointer"}
                 minW={0}
+                pr={"10px"}
               >
                 <Avatar
                   size={{ base: "sm", md: "md" }}
@@ -285,33 +301,33 @@ const MobileNavItem = ({ label, children, href }) => {
 
   return (
     <Stack spacing={0} onClick={children && onToggle}>
-      <Link to={href}>
-        <Flex
-          py={2}
-          justify={"space-between"}
-          align={"center"}
-          _hover={{
-            textDecoration: "none",
-          }}
-        >
+      <Flex
+        py={2}
+        justify={"space-between"}
+        align={"center"}
+        _hover={{
+          textDecoration: "none",
+        }}
+      >
+        <Link to={href}>
           <Text
             fontWeight={600}
             color={useColorModeValue("gray.600", "gray.200")}
           >
             {label}
           </Text>
+        </Link>
 
-          {children && (
-            <Icon
-              as={ChevronDownIcon}
-              transition={"all .25s ease-in-out"}
-              transform={isOpen ? "rotate(180deg)" : ""}
-              w={6}
-              h={6}
-            />
-          )}
-        </Flex>
-      </Link>
+        {children && (
+          <Icon
+            as={ChevronDownIcon}
+            transition={"all .25s ease-in-out"}
+            transform={isOpen ? "rotate(180deg)" : ""}
+            w={6}
+            h={6}
+          />
+        )}
+      </Flex>
 
       <Collapse in={isOpen} animateOpacity style={{ marginTop: "0!important" }}>
         <Stack
