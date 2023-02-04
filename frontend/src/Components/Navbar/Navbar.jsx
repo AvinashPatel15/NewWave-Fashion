@@ -84,8 +84,16 @@ const Navbar = () => {
             alignItems={"center"}
           >
             <Link to="/">
-              <Box w={"50px"} justify={"center"}>
+              <Box w={"80px"} justify={"center"}>
                 <Image src={nwlogo2} width={"100%"} height={"auto"} />
+                {/* <Text
+                  fontSize={"17px"}
+                  bgGradient="linear(to-l, #7928CA, #FF0080)"
+                  bgClip="text"
+                  fontWeight={"bold"}
+                >
+                  NewWave
+                </Text> */}
               </Box>
             </Link>
 
@@ -102,7 +110,7 @@ const Navbar = () => {
           >
             <InputGroup
               size={{ base: "sm", md: "md" }}
-              marginRight={{ base: 3, sm: 5, md: 7 }}
+              marginRight={{ base: 2, sm: 4, md: 5 }}
               marginTop={1.5}
               border={"1px solid grey"}
               borderRadius={5}
