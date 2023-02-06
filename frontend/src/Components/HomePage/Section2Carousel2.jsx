@@ -2,7 +2,7 @@ import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper";
+import { Autoplay } from "swiper";
 import { Box, Image } from "@chakra-ui/react";
 import Section2Carousel2Img1 from "../../Assets/Section2Carousel2Img1.jpg";
 import Section2Carousel2Img2 from "../../Assets/Section2Carousel2Img2.jpg";
@@ -21,7 +21,7 @@ const Section2Carousel2 = () => {
           pagination={{
             clickable: true,
           }}
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay]}
           className="mySwiper"
         >
           <SwiperSlide>

@@ -7,6 +7,13 @@ import Section1Carousel1 from "../../Components/HomePage/Section1Carousel1";
 import Section1Carousel2 from "../../Components/HomePage/Section1Carousel2";
 import Section2Carousel1 from "../../Components/HomePage/Section2Carousel1";
 import Section2Carousel2 from "../../Components/HomePage/Section2Carousel2";
+import Section3 from "../../Components/HomePage/Section3";
+import Section4 from "../../Components/HomePage/Section4";
+import Section5Carousel1 from "../../Components/HomePage/Section5Carousel1";
+import Section6 from "../../Components/HomePage/Section6";
+import Section7 from "../../Components/HomePage/Section7";
+import Section8 from "../../Components/HomePage/Section8";
+import Section9 from "../../Components/HomePage/Section9";
 
 const Home = () => {
   return (
@@ -33,6 +40,35 @@ const Home = () => {
       <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
         <Section2Carousel2 />
       </Box>
+      {/* Section 3 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section3 />
+      </Box>
+      {/* Section 4 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section4 />
+      </Box>
+      {/* Section 5 Carousel 1 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section5Carousel1 />
+      </Box>
+      {/* Section 6 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section6 />
+      </Box>
+      {/* Section 7 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section7 />
+      </Box>
+      {/* Section 8 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section8 />
+      </Box>
+      {/* Section 9 */}
+      <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
+        <Section9 />
+      </Box>
+      {/* Footer */}
       <Footer />
     </>
   );
