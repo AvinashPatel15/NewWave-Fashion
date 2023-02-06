@@ -85,15 +85,11 @@ const Navbar = () => {
           >
             <Link to="/">
               <Box w={"80px"} justify={"center"}>
-                <Image src={nwlogo2} width={"100%"} height={"auto"} />
-                {/* <Text
-                  fontSize={"17px"}
-                  bgGradient="linear(to-l, #7928CA, #FF0080)"
-                  bgClip="text"
-                  fontWeight={"bold"}
-                >
-                  NewWave
-                </Text> */}
+                <Image
+                  src={nwlogo2}
+                  width={{ base: "60%", md: "75%" }}
+                  height={"auto"}
+                />
               </Box>
             </Link>
 
