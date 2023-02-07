@@ -13,7 +13,7 @@ const EmailVerify = () => {
   useEffect(() => {
     const verifyEmailUrl = async () => {
       try {
-        const url = `https://new-wave-fashion-server.onrender.com/users/${param.id}/verify/${param.token}`;
+        const url = `https://new-wave-fashion-server.cyclic.app/users/${param.id}/verify/${param.token}`;
         const { data } = await axios.get(url);
         setValidUrl(true);
       } catch (error) {
