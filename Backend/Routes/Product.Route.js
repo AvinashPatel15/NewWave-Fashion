@@ -8,8 +8,15 @@ const productRouter = express.Router();
 /** For Getting All The Products Data */
 
 productRouter.get("/", async (req, res) => {
+  const { q } = req.body;
   try {
-    const product = await ProductModel.find();
+    const product = await ProductModel.find(
+      q
+        ? {
+            $or: [{ title: { $regex: "^" + q } }],
+          }
+        : null
+    );
     res.send(product);
   } catch (error) {
     res.status(401).send({ message: "Something Went Wrong" });
