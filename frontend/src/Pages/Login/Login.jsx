@@ -9,7 +9,6 @@ import {
   Stack,
   Button,
   Heading,
-  useColorModeValue,
   Image,
   useToast,
   InputGroup,

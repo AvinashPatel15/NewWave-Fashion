@@ -33,9 +33,22 @@ import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import nwlogo2 from "../../Assets/nwlogo2.png";
+import { useState } from "react";
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
+  const [refresh, setRefresh] = useState(true);
+
+  let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
+  let firstName = tokenData.firstName || null;
+  let lastName = tokenData.lastName || null;
+  let name = firstName + " " + lastName;
+  let email = tokenData.email || null;
+
+  const logout = () => {
+    localStorage.clear("localmart");
+    setRefresh(!refresh);
+  };
 
   return (
     <>
@@ -167,10 +180,14 @@ const Navbar = () => {
                 />
               </MenuButton>
               <MenuList>
-                <MenuItem>Name</MenuItem>
-                <MenuItem>Email</MenuItem>
-                <MenuItem>Profile</MenuItem>
-                <MenuItem>Orders</MenuItem>
+                {tokenData && (
+                  <>
+                    <MenuItem>{name}</MenuItem>
+                    <MenuItem>{email}</MenuItem>
+                    <MenuItem>Profile</MenuItem>
+                    <MenuItem>Orders</MenuItem>
+                  </>
+                )}
                 <MenuItem
                   display={{ base: "flex", lg: "none" }}
                   icon={<AiOutlineHeart size={20} />}
@@ -183,10 +200,22 @@ const Navbar = () => {
                 >
                   Cart
                 </MenuItem>
-                <MenuDivider />
-                <Link to="/login">
-                  <MenuItem>Login</MenuItem>
-                </Link>
+                {tokenData ? (
+                  <>
+                    <MenuDivider />
+                    <MenuItem onClick={logout}>Logout</MenuItem>
+                  </>
+                ) : (
+                  <>
+                    <MenuDivider display={{ base: "flex", lg: "none" }} />
+                    <Link to="/login">
+                      <MenuItem>Login</MenuItem>
+                    </Link>
+                    <Link to="/sign-up">
+                      <MenuItem>Sign Up</MenuItem>
+                    </Link>
+                  </>
+                )}
               </MenuList>
             </Menu>
           </Stack>
