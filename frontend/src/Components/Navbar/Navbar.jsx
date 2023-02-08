@@ -184,7 +184,9 @@ const Navbar = () => {
                   Cart
                 </MenuItem>
                 <MenuDivider />
-                <MenuItem>Logout</MenuItem>
+                <Link to="/login">
+                  <MenuItem>Login</MenuItem>
+                </Link>
               </MenuList>
             </Menu>
           </Stack>

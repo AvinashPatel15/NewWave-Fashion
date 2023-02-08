@@ -2,8 +2,8 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import EmailVerify from "../Pages/Email-Verify/EmailVerify";
 import Home from "../Pages/HomePage/Home";
-import Login from "../Pages/Login/Login";
 import Register from "../Pages/Sign-up/Register";
+import Login from "../Pages/Login/Login";
 
 const AllRoutes = () => {
   return (

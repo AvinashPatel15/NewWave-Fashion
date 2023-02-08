@@ -19,6 +19,7 @@ import {
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import nwlogo2 from "../../Assets/nwlogo2.png";
+import signupbackground from "../../Assets/signupbackground.jpg";
 
 const initState = {
   email: "",
@@ -67,7 +68,7 @@ const Login = () => {
           isClosable: false,
         });
         localStorage.setItem(
-          "localmart",
+          "newwave",
           JSON.stringify({
             token: resData.token,
             firstName: resData.first_name,
@@ -90,98 +91,112 @@ const Login = () => {
   };
 
   return (
-    <Flex
-      minH={"100vh"}
-      align={"center"}
-      justify={"center"}
-      bg={useColorModeValue("gray.50", "gray.800")}
+    <Box
+      backgroundImage={signupbackground}
+      backgroundPosition={"center"}
+      backgroundRepeat={"no-repeat"}
+      backgroundSize={"cover"}
+      blur={"4px"}
     >
-      <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
-        <Stack align={"center"}>
-          <Heading fontSize={"4xl"}>Sign in to your account</Heading>
-          <Link to="/">
-            <Image src={nwlogo2} width={"100%"} height={"auto"} />
-          </Link>
-        </Stack>
-        <Box
-          rounded={"lg"}
-          bg={useColorModeValue("white", "gray.700")}
-          boxShadow={"lg"}
-          p={8}
-        >
-          <Stack spacing={4}>
-            <FormControl id="email">
-              <FormLabel>Email address</FormLabel>
-              <Input
-                type="email"
-                name="email"
-                placeholder="Enter Your Email"
-                value={formData.email}
-                onChange={handleChange}
+      <Flex minH={"100vh"} align={"center"} justify={"center"}>
+        <Stack spacing={8} mx={"auto"} maxW={"lg"} py={12} px={6}>
+          <Stack align={"center"}>
+            <Heading fontSize={"4xl"}>Sign In</Heading>
+            <Link to="/">
+              <Image
+                src={nwlogo2}
+                width={"20%"}
+                margin={"auto"}
+                height={"auto"}
               />
-            </FormControl>
-            <FormControl id="password" isRequired>
-              <FormLabel>Password</FormLabel>
-              <InputGroup>
+            </Link>
+          </Stack>
+          <Box
+            rounded={"lg"}
+            bg={"rgba(255, 148, 24, 0.3)"}
+            boxShadow={
+              "rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px"
+            }
+            p={8}
+            position={"relative"}
+            right={{ base: 0, lg: 300 }}
+          >
+            <Stack spacing={4}>
+              <FormControl id="email">
+                <FormLabel>Email address</FormLabel>
                 <Input
-                  type={showPassword ? "text" : "password"}
-                  name="password"
-                  placeholder="Enter 8 Digit Password"
-                  value={formData.password}
+                  type="email"
+                  name="email"
+                  placeholder="Enter Your Email"
+                  value={formData.email}
                   onChange={handleChange}
                 />
-                <InputRightElement h={"full"}>
-                  <Button
-                    variant={"ghost"}
-                    onClick={() =>
-                      setShowPassword((showPassword) => !showPassword)
-                    }
-                  >
-                    {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                  </Button>
-                </InputRightElement>
-              </InputGroup>
-            </FormControl>
-            <Stack spacing={10}>
-              <Stack
-                direction={{ base: "column", sm: "row" }}
-                align={"start"}
-                justify={"space-between"}
-              >
-                <Checkbox>Remember me</Checkbox>
-                <Link color={"blue.400"}>Forgot password?</Link>
+              </FormControl>
+              <FormControl id="password" isRequired>
+                <FormLabel>Password</FormLabel>
+                <InputGroup>
+                  <Input
+                    type={showPassword ? "text" : "password"}
+                    name="password"
+                    placeholder="Enter 8 Digit Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                  />
+                  <InputRightElement h={"full"}>
+                    <Button
+                      variant={"ghost"}
+                      onClick={() =>
+                        setShowPassword((showPassword) => !showPassword)
+                      }
+                    >
+                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                    </Button>
+                  </InputRightElement>
+                </InputGroup>
+              </FormControl>
+              <Stack spacing={10}>
+                <Stack
+                  direction={{ base: "column", sm: "row" }}
+                  align={"start"}
+                  justify={"space-between"}
+                >
+                  <Checkbox>Remember me</Checkbox>
+                  <Text cursor={"pointer"} color={"blue.400"}>
+                    Forgot password?
+                  </Text>
+                </Stack>
+                <Button
+                  onClick={handleSubmit}
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Sign in
+                </Button>
               </Stack>
-              <Button
-                onClick={handleSubmit}
-                bg={"blue.400"}
-                color={"white"}
-                _hover={{
-                  bg: "blue.500",
-                }}
-              >
-                Sign in
-              </Button>
             </Stack>
-          </Stack>
-          <Stack pt={3} display={"flex"}>
-            <Text
-              align={"center"}
-              display={"flex"}
-              justifyContent={"center"}
-              gap={"4px"}
-              alignItems={"center"}
-            >
-              New User?
-              <Link to="/register">
-                <Text color={"#138CF1"} textDecoration={"underline"}>
-                  Register
-                </Text>
-              </Link>
-            </Text>
-          </Stack>
-        </Box>
-      </Stack>
-    </Flex>
+            <Stack pt={3} display={"flex"}>
+              <Text
+                align={"center"}
+                display={"flex"}
+                justifyContent={"center"}
+                gap={"4px"}
+                alignItems={"center"}
+              >
+                New User?
+                <Link to="/sign-up">
+                  <Text color={"#138CF1"} textDecoration={"underline"}>
+                    Register
+                  </Text>
+                </Link>
+              </Text>
+            </Stack>
+          </Box>
+        </Stack>
+      </Flex>
+    </Box>
   );
 };
 
