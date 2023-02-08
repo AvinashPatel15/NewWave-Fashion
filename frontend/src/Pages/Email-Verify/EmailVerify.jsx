@@ -14,7 +14,7 @@ const EmailVerify = () => {
     const verifyEmailUrl = async () => {
       try {
         const url = `https://new-wave-fashion-server.cyclic.app/users/${param.id}/verify/${param.token}`;
-        await axios.get(url);
+        let data = await axios.get(url);
         setValidUrl(true);
       } catch (error) {
         console.log(error);

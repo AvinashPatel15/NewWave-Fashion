@@ -92,7 +92,7 @@ userRouter.post(
               token: crypto.randomBytes(32).toString("hex"),
             }).save();
 
-            const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+            const url = `https://new-wave-fashion.vercel.app/users/${user._id}/verify/${token.token}`;
             await sendEmail(user.email, "Verify Email", url, user.first_name);
             res.send({
               message: "Please Check Your Mail To Verify Your Account!",
@@ -160,7 +160,7 @@ userRouter.post(
                   token: crypto.randomBytes(32).toString("hex"),
                 }).save();
 
-                const url = `${process.env.BASE_URL}/users/${user._id}/verify/${token.token}`;
+                const url = `https://new-wave-fashion.vercel.app/users/${user._id}/verify/${token.token}`;
                 await sendEmail(
                   user.email,
                   "Verify Email",
