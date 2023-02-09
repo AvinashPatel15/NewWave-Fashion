@@ -8,6 +8,7 @@ const { UserAuth } = require("../Middlewares/UserAuth.Middleware");
 const { body, validationResult } = require("express-validator");
 const { TokenModel } = require("../Models/Token.Model");
 const sendEmail = require("../Utils/sendEmail");
+const { AdminAuth } = require("../Middlewares/AdminAuth.Middleware");
 
 const userRouter = express.Router();
 
@@ -201,7 +202,7 @@ userRouter.post(
 
 /** For Getting The User Data And This Route Is Only Work For Admin Other People's Can't Use This Route */
 
-userRouter.get("/", UserAuth, async (req, res) => {
+userRouter.get("/", AdminAuth, async (req, res) => {
   try {
     let { q } = req.query;
     let user;
@@ -224,7 +225,7 @@ userRouter.get("/", UserAuth, async (req, res) => {
 
 /** For Deleting The User Data And This Route Is Only Work For Admin Other People's Can't Use This Route */
 
-userRouter.delete("/delete/:id", UserAuth, async (req, res) => {
+userRouter.delete("/delete/:id", AdminAuth, async (req, res) => {
   const ID = req.params.id;
   try {
     await UserModel.findByIdAndDelete({ _id: ID });
