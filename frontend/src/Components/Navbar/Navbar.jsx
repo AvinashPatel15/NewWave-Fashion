@@ -211,11 +211,11 @@ const Navbar = () => {
                 ) : (
                   <>
                     <MenuDivider display={{ base: "flex", lg: "none" }} />
-                    <Link to="/login">
-                      <MenuItem>Login</MenuItem>
-                    </Link>
                     <Link to="/sign-up">
                       <MenuItem>Sign Up</MenuItem>
+                    </Link>
+                    <Link to="/login">
+                      <MenuItem>Login</MenuItem>
                     </Link>
                   </>
                 )}

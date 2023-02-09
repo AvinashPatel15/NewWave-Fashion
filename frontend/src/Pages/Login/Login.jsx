@@ -166,6 +166,7 @@ const Login = () => {
                 </Stack>
                 <Button
                   onClick={handleSubmit}
+                  loadingText="Submitting"
                   bg={"blue.400"}
                   color={"white"}
                   _hover={{

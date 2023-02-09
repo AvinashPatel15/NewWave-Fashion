@@ -14,12 +14,17 @@ import Section6 from "../../Components/HomePage/Section6";
 import Section7 from "../../Components/HomePage/Section7";
 import Section8 from "../../Components/HomePage/Section8";
 import Section9 from "../../Components/HomePage/Section9";
+import TopSection from "../../Components/HomePage/TopSection";
 
 const Home = () => {
   return (
     <>
       {/* Navbar */}
       <Navbar />
+      {/* Top Section */}
+      <Box width={"100%"} marginTop={{ base: 3, md: 5 }}>
+        <TopSection />
+      </Box>
       {/* Section 1 Carousel 1 */}
       <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
         <Section1Carousel1 />
