@@ -1,67 +1,36 @@
 const express = require("express");
+const {
+  deleteProduct,
+} = require("../Controllers/Product-Controllers/DeleteProduct.Controller");
+const {
+  getProducts,
+} = require("../Controllers/Product-Controllers/GetProduct.Controller");
+const {
+  postProduct,
+} = require("../Controllers/Product-Controllers/PostProduct.Controller");
+const {
+  updateProduct,
+} = require("../Controllers/Product-Controllers/UpdateProduct.Controller");
 const { AdminAuth } = require("../Middlewares/AdminAuth.Middleware");
-const { ProductModel } = require("../Models/Product.Model");
 require("dotenv").config();
 
 const productRouter = express.Router();
 
 /** For Getting All The Products Data */
 
-productRouter.get("/", async (req, res) => {
-  const { q } = req.body;
-  try {
-    const product = await ProductModel.find(
-      q
-        ? {
-            $or: [{ title: { $regex: "^" + q } }],
-          }
-        : null
-    );
-    res.send(product);
-  } catch (error) {
-    res.status(401).send({ message: "Something Went Wrong" });
-    console.log(error);
-  }
-});
+productRouter.get("/", getProducts);
 
 /** For Post A Product */
 
-productRouter.post("/post", AdminAuth, async (req, res) => {
-  const data = req.body;
-  data.userID = req.userID;
-  try {
-    const book = await ProductModel(data);
-    await book.save();
-    res.send(book);
-  } catch (error) {
-    console.log(error);
-  }
-});
+productRouter.post("/post", AdminAuth, postProduct);
 
 /** For Update A Product Using ID*/
 
-productRouter.patch("/update/:id", AdminAuth, async (req, res) => {
-  const ID = req.params.id;
-  const payload = req.body;
-  try {
-    await ProductModel.findByIdAndUpdate({ _id: ID }, payload);
-    res.send(`Update The Book Data Whose ID Is ${ID}`);
-  } catch (error) {
-    console.log(error);
-  }
-});
+productRouter.patch("/update/:id", AdminAuth, updateProduct);
 
 /** For Delete A Product Using ID*/
 
-productRouter.delete("/delete/:id", AdminAuth, async (req, res) => {
-  const ID = req.params.id;
-  try {
-    await ProductModel.findByIdAndDelete({ _id: ID });
-    res.send(`Delete The Book Data Whose ID Is ${ID}`);
-  } catch (error) {
-    console.log(error);
-  }
-});
+productRouter.delete("/delete/:id", AdminAuth, deleteProduct);
 
 module.exports = {
   productRouter,
