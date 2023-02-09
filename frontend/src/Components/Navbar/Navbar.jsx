@@ -34,6 +34,7 @@ import { GoSearch } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import nwlogo2 from "../../Assets/nwlogo2.png";
 import { useState } from "react";
+import Logout from "./Logout";
 
 const Navbar = () => {
   const { isOpen, onToggle } = useDisclosure();
@@ -203,7 +204,9 @@ const Navbar = () => {
                 {tokenData ? (
                   <>
                     <MenuDivider />
-                    <MenuItem onClick={logout}>Logout</MenuItem>
+                    <MenuItem color={"red.500"} fontWeight={"bold"}>
+                      <Logout onClick={logout} />
+                    </MenuItem>
                   </>
                 ) : (
                   <>
@@ -387,50 +390,50 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Men",
-    href: "/men",
+    href: "/men-products",
     children: [
       {
         label: "Western Wear",
-        href: "/men-western-wear",
+        href: "#",
       },
       {
         label: "Footwear",
-        href: "/men-footwear",
+        href: "#",
       },
       {
         label: "Accessories",
-        href: "/men-accessories",
+        href: "#",
       },
     ],
   },
   {
     label: "Women",
-    href: "/women",
+    href: "#",
     children: [
       {
         label: "Western Wear",
-        href: "/women-western-wear",
+        href: "#",
       },
       {
         label: "Ethnic Wear",
-        href: "/women-ethnic-wear",
+        href: "#",
       },
       {
         label: "Footwear",
-        href: "/women-footwear",
+        href: "#",
       },
       {
         label: "Accessories",
-        href: "/women-accessories",
+        href: "#",
       },
     ],
   },
   {
     label: "Girls",
-    href: "/girls",
+    href: "#",
   },
   {
     label: "Boys",
-    href: "/boys",
+    href: "#",
   },
 ];
