@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import styles from "./TopSection.module.css";
 import { Link } from "react-router-dom";
 
@@ -21,19 +21,24 @@ const TopSection = () => {
           justifyContent={"center"}
           alignItems={"center"}
         >
-          <Box textAlign={"left"}>
-            <Box>
+          <Box
+            display={"flex"}
+            flexDirection={"column"}
+            justifyContent={"center"}
+            alignItems={"flex-start"}
+          >
+            <Box textAlign={"left"}>
               <Text
-                color={"white"}
-                fontSize={{ base: "5xl", md: "8xl" }}
+                fontSize={{ base: "5xl", md: "7xl" }}
                 fontWeight={"bold"}
                 marginBottom={-5}
+                color={"blackAlpha.800"}
               >
                 Welcome To :
               </Text>
               <Text
                 color={"white"}
-                fontSize={{ base: "5xl", md: "8xl" }}
+                fontSize={{ base: "5xl", md: "7xl" }}
                 fontWeight={"bold"}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
                 bgClip={"text"}
@@ -42,7 +47,7 @@ const TopSection = () => {
               </Text>
               <Text
                 color={"white"}
-                fontSize={{ base: "5xl", md: "8xl" }}
+                fontSize={{ base: "5xl", md: "7xl" }}
                 fontWeight={"bold"}
                 marginTop={{ base: -6, md: -10 }}
                 bgGradient="linear(to-l, #7928CA, #FF0080)"
@@ -51,7 +56,7 @@ const TopSection = () => {
                 Fashion
               </Text>
             </Box>
-            <Box display={"flex"} gap={5} marginTop={3}>
+            <Box width={"100%"} display={"flex"} gap={5}>
               <Link to="/sign-up">
                 <button className={styles.button}>Sign Up</button>
               </Link>
@@ -60,10 +65,10 @@ const TopSection = () => {
               </Link>
             </Box>
           </Box>
-          <Box>
+          <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>
             <Image
               src="https://res.cloudinary.com/drlbtp3dt/image/upload/v1675976238/samples/Untitled_design_odjetn.png"
-              width={"100%"}
+              width={"80%"}
               height={"auto"}
             />
           </Box>
