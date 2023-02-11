@@ -6,6 +6,7 @@ export const Login = (loginData) => async (dispatch) => {
       "https://new-wave-fashion-server.cyclic.app/users/login",
       loginData
     );
+    console.log(data);
   } catch (error) {
     console.log(error);
   }
