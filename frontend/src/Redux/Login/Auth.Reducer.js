@@ -1,11 +1,16 @@
-import { LOGIN_FAILED, LOGIN_LOADING, LOGIN_SUCCESS } from "./Auth.ActionTypes";
+import {
+  LOGIN_FAILED,
+  LOGIN_LOADING,
+  LOGIN_SUCCESS,
+  LOGOUT,
+} from "./Auth.ActionTypes";
 
 const token = JSON.parse(localStorage.getItem("newwave")) || null;
 
 const initState = {
-  isAuth: token.token || false,
+  isAuth: token? token.token : false,
   isSuccess: null,
-  isToken: token.token || false,
+  isToken: token? token.token : false,
   isError: false,
   isLoading: false,
 };
@@ -33,6 +38,15 @@ export const AuthReducer = (state = initState, { payload, type }) => {
         isLoading: false,
         isAuth: false,
         isToken: false,
+      };
+    case LOGOUT:
+      localStorage.removeItem("newwave");
+      return {
+        ...state,
+        isAuth: false,
+        isToken: false,
+        isError: false,
+        isLoading: false,
       };
     default:
       return state;
