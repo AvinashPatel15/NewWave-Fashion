@@ -1,18 +1,18 @@
 import { Box } from "@chakra-ui/react";
 import React from "react";
-import Footer from "../../../Components/Footer/Footer";
-import Navbar from "../../../Components/Navbar/Navbar";
+import Footer from "../../Components/Footer/Footer";
+import Navbar from "../../Components/Navbar/Navbar";
 
-const MenProducts = () => {
+const Products = () => {
   return (
     <>
       <Navbar />
       <Box width={{ base: "95%", lg: "90%" }} margin="auto">
-        Mens Product Page
+        Products Page
       </Box>
       <Footer />
     </>
   );
 };
 
-export default MenProducts;
+export default Products;

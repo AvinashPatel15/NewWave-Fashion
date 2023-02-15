@@ -4,7 +4,7 @@ import EmailVerify from "../Pages/Email-Verify/EmailVerify";
 import Home from "../Pages/HomePage/Home";
 import Register from "../Pages/Sign-up/Register";
 import Login from "../Pages/Login/Login";
-import MenProducts from "../Pages/Product-Pages/Men/MenProducts";
+import Products from "../Pages/Product-Page/Products";
 
 const AllRoutes = () => {
   return (
@@ -13,7 +13,7 @@ const AllRoutes = () => {
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/sign-up" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/men-products" element={<MenProducts />} />
+      <Route path="/products" element={<Products />} />
     </Routes>
   );
 };
