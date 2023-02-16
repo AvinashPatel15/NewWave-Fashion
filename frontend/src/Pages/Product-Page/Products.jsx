@@ -3,19 +3,17 @@ import {
   Box,
   Button,
   Grid,
-  GridItem,
   Heading,
-  Image,
   Menu,
   MenuButton,
   MenuItem,
   MenuList,
-  Text,
 } from "@chakra-ui/react";
 import React from "react";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 import AllFilters from "../../Components/Products/AllFilters";
+import ProductCard from "../../Components/Products/ProductCard";
 import ProductsItems from "./ProductsItems";
 
 const Products = () => {
@@ -86,32 +84,7 @@ const Products = () => {
             gap={10}
           >
             {ProductsItems &&
-              ProductsItems.map(
-                ({ id, title, brand, color, price, discount, images }) => (
-                  <GridItem
-                    key={id}
-                    borderRadius={5}
-                    backgroundColor={"#F7F8F7"}
-                  >
-                    <Box>
-                      <Box
-                        width={"100%"}
-                        height={"300px"}
-                        overflow={"hidden"}
-                        borderRadius={5}
-                      >
-                        <Image
-                          src={images[0].url}
-                          width={"100%"}
-                          height={"auto"}
-                          objectFit={"cover"}
-                        />
-                      </Box>
-                      <Text>{title}</Text>
-                    </Box>
-                  </GridItem>
-                )
-              )}
+              ProductsItems.map((ele) => <ProductCard key={ele.id} {...ele} />)}
           </Grid>
         </Box>
       </Box>

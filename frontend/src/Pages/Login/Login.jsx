@@ -16,9 +16,11 @@ import {
   Text,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import nwlogo2 from "../../Assets/nwlogo2.png";
 import signupbackground from "../../Assets/signupbackground.jpg";
+import { AuthLogin } from "../../Redux/Login/Auth.Actions";
 
 const initState = {
   email: "",
@@ -27,66 +29,20 @@ const initState = {
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const toast = useToast();
   const [formData, setFormData] = useState(initState);
+  const toast = useToast();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const data = useSelector((store) => store);
+  console.log(data);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async () => {
-    try {
-      let res = await fetch(
-        "https://new-wave-fashion-server.cyclic.app/users/login",
-        {
-          method: "POST",
-          body: JSON.stringify(formData),
-          headers: {
-            "Content-type": "application/json",
-          },
-        }
-      );
-
-      let resData = await res.json();
-      if (res.status >= 400) {
-        toast({
-          position: "top",
-          description: resData.message,
-          status: "error",
-          duration: 2000,
-          isClosable: false,
-        });
-      } else {
-        toast({
-          position: "top",
-          description: resData.message,
-          status: "success",
-          duration: 2000,
-          isClosable: false,
-        });
-        localStorage.setItem(
-          "newwave",
-          JSON.stringify({
-            token: resData.token,
-            firstName: resData.first_name,
-            lastName: resData.last_name,
-            email: resData.email,
-            admin: resData.admin,
-          })
-        );
-        navigate("/");
-      }
-    } catch (error) {
-      toast({
-        position: "top",
-        description: error.message,
-        status: "error",
-        duration: 2000,
-        isClosable: false,
-      });
-    }
+  const handleSubmit = () => {
+    dispatch(AuthLogin(formData));
   };
 
   return (
@@ -121,61 +77,65 @@ const Login = () => {
             right={{ base: 0, lg: 300 }}
           >
             <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Enter Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </FormControl>
-              <FormControl id="password" isRequired>
-                <FormLabel>Password</FormLabel>
-                <InputGroup>
+              <form onSubmit={handleSubmit}>
+                <FormControl id="email">
+                  <FormLabel>Email address</FormLabel>
                   <Input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Enter 8 Digit Password"
-                    value={formData.password}
+                    type="email"
+                    name="email"
+                    placeholder="Enter Your Email"
+                    value={formData.email}
                     onChange={handleChange}
+                    required
                   />
-                  <InputRightElement h={"full"}>
-                    <Button
-                      variant={"ghost"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
-                    >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
-                    </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                  justify={"space-between"}
-                >
-                  <Checkbox>Remember me</Checkbox>
-                  <Text cursor={"pointer"} color={"blue.400"}>
-                    Forgot password?
-                  </Text>
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>Password</FormLabel>
+                  <InputGroup>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Enter 8 Digit Password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputRightElement h={"full"}>
+                      <Button
+                        variant={"ghost"}
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }
+                      >
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+                <Stack spacing={10}>
+                  <Stack
+                    direction={{ base: "column", sm: "row" }}
+                    align={"start"}
+                    justify={"space-between"}
+                  >
+                    <Checkbox>Remember me</Checkbox>
+                    <Text cursor={"pointer"} color={"blue.400"}>
+                      Forgot password?
+                    </Text>
+                  </Stack>
+                  <Button
+                    loadingText="Submitting"
+                    bg={"blue.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                    type="submit"
+                  >
+                    Sign in
+                  </Button>
                 </Stack>
-                <Button
-                  onClick={handleSubmit}
-                  loadingText="Submitting"
-                  bg={"blue.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
-                >
-                  Sign in
-                </Button>
-              </Stack>
+              </form>
             </Stack>
             <Stack pt={3} display={"flex"}>
               <Text
