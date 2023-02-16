@@ -1,4 +1,3 @@
-import { HamburgerIcon } from "@chakra-ui/icons";
 import {
   Box,
   Button,
@@ -22,6 +21,7 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useRef, useState } from "react";
+import styles from "./FilterButton.module.css";
 
 const AllFilters = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -32,13 +32,16 @@ const AllFilters = () => {
 
   return (
     <>
-      <Button
-        leftIcon={<HamburgerIcon />}
-        colorScheme="purple"
-        onClick={onOpen}
-      >
-        Filters
-      </Button>
+      <button className={styles.btn} onClick={onOpen}>
+        <span className={styles.icon}>
+          <svg viewBox="0 0 175 80" width="40" height="40">
+            <rect width="80" height="15" fill="#040f16" rx="10"></rect>
+            <rect y="30" width="80" height="15" fill="#040f16" rx="10"></rect>
+            <rect y="60" width="80" height="15" fill="#040f16" rx="10"></rect>
+          </svg>
+        </span>
+        <span className={styles.text}>Filters</span>
+      </button>
       <Drawer
         isOpen={isOpen}
         placement="left"

@@ -390,7 +390,7 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Men",
-    href: "/men-products",
+    href: "/products",
     children: [
       {
         label: "Western Wear",
@@ -408,7 +408,7 @@ const NAV_ITEMS = [
   },
   {
     label: "Women",
-    href: "#",
+    href: "/products",
     children: [
       {
         label: "Western Wear",
@@ -430,10 +430,10 @@ const NAV_ITEMS = [
   },
   {
     label: "Girls",
-    href: "#",
+    href: "/products",
   },
   {
     label: "Boys",
-    href: "#",
+    href: "/products",
   },
 ];
