@@ -10,6 +10,7 @@ import {
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsCartPlusFill } from "react-icons/bs";
+import { Link } from "react-router-dom";
 
 const ProductCard = ({ title, brand, color, price, discount, images }) => {
   let discountPrice = (price * discount) / 100;
@@ -19,24 +20,28 @@ const ProductCard = ({ title, brand, color, price, discount, images }) => {
     <>
       <GridItem borderRadius={5} backgroundColor={"#F7F8F7"}>
         <Box>
-          <Box
-            width={"100%"}
-            height={"300px"}
-            overflow={"hidden"}
-            borderRadius={5}
-          >
-            <Image
-              src={images[0].url}
+          <Link to={"/detail-page"} target="_blank">
+            <Box
               width={"100%"}
-              height={"auto"}
-              objectFit={"cover"}
-            />
-          </Box>
+              height={"300px"}
+              overflow={"hidden"}
+              borderRadius={5}
+            >
+              <Image
+                src={images[0].url}
+                width={"100%"}
+                height={"auto"}
+                objectFit={"cover"}
+              />
+            </Box>
+          </Link>
 
           <Box padding={4}>
-            <Text fontSize={15} fontWeight={600} lineHeight={1}>
-              {title}
-            </Text>
+            <Link to={"/detail-page"} target="_blank">
+              <Text fontSize={15} fontWeight={600} lineHeight={1}>
+                {title}
+              </Text>
+            </Link>
 
             <Flex mt={3} justifyContent={"space-between"} alignItems={"center"}>
               <Text
