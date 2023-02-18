@@ -20,6 +20,10 @@ const productRouter = express.Router();
 
 productRouter.get("/", getProducts);
 
+/** For Getting Data From Product ID */
+
+productRouter.get("/:id", getProducts);
+
 /** For Post A Product */
 
 productRouter.post("/post", AdminAuth, postProduct);
