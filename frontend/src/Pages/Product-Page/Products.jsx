@@ -25,7 +25,7 @@ const Products = () => {
     setLoading(true);
     try {
       let res = await axios.get(
-        "https://new-wave-fashion-server.cyclic.app/products"
+        `${process.env.REACT_APP_BACKEND_URL}/products`
       );
       setProducts(res.data);
       setLoading(false);
