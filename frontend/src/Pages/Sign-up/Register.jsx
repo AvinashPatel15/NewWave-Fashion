@@ -38,6 +38,7 @@ const initState = {
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState(initState);
+  const [loading, setLoading] = useState(false);
   const toast = useToast();
   const navigate = useNavigate();
 
@@ -46,7 +47,9 @@ const Register = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
     try {
       let res = await fetch(
         `${process.env.REACT_APP_BACKEND_URL}/users/register`,
@@ -60,12 +63,13 @@ const Register = () => {
       );
 
       let resData = await res.json();
+      setLoading(false);
       if (res.status >= 400) {
         toast({
           position: "top",
           description: resData.message,
           status: "error",
-          duration: 1000,
+          duration: 2000,
           isClosable: false,
         });
       } else {
@@ -73,17 +77,18 @@ const Register = () => {
           position: "top",
           description: resData.message,
           status: "success",
-          duration: 1000,
+          duration: 2000,
           isClosable: false,
         });
         navigate("/login");
       }
     } catch (error) {
+      setLoading(false);
       toast({
         position: "top",
         description: error.message,
         status: "error",
-        duration: 1000,
+        duration: 2000,
         isClosable: false,
       });
     }
@@ -154,6 +159,7 @@ const Register = () => {
                       name="first_name"
                       value={formData.first_name}
                       onChange={handleChange}
+                      required
                     />
                   </FormControl>
                 </Box>
@@ -166,6 +172,7 @@ const Register = () => {
                       name="last_name"
                       value={formData.last_name}
                       onChange={handleChange}
+                      required
                     />
                   </FormControl>
                 </Box>
@@ -180,6 +187,7 @@ const Register = () => {
                       name="age"
                       value={formData.age}
                       onChange={handleChange}
+                      required
                     />
                   </FormControl>
                 </Box>
@@ -191,6 +199,7 @@ const Register = () => {
                       name="gender"
                       value={formData.gender}
                       onChange={handleChange}
+                      required
                     >
                       <option value="male">Male</option>
                       <option value="female">Female</option>
@@ -209,6 +218,7 @@ const Register = () => {
                       placeholder="Enter Phone Number"
                       value={formData.phone}
                       onChange={handleChange}
+                      required
                     />
                   </FormControl>
                 </Box>
@@ -220,6 +230,7 @@ const Register = () => {
                       name="pincode"
                       placeholder="Enter Pincode"
                       onChange={getPincodeData}
+                      required
                     />
                   </FormControl>
                 </Box>
@@ -232,6 +243,7 @@ const Register = () => {
                   placeholder="Enter Your Address"
                   value={formData.address}
                   onChange={handleChange}
+                  required
                 />
               </FormControl>
               <HStack>
@@ -266,6 +278,7 @@ const Register = () => {
                   placeholder="Enter Your Email"
                   value={formData.email}
                   onChange={handleChange}
+                  required
                 />
               </FormControl>
               <FormControl id="password" isRequired>
@@ -277,6 +290,7 @@ const Register = () => {
                     placeholder="Enter 8 Digit Password"
                     value={formData.password}
                     onChange={handleChange}
+                    required
                   />
                   <InputRightElement h={"full"}>
                     <Button
@@ -291,18 +305,32 @@ const Register = () => {
                 </InputGroup>
               </FormControl>
               <Stack spacing={10} pt={2}>
-                <Button
-                  onClick={handleSubmit}
-                  loadingText="Submitting"
-                  size="lg"
-                  bg={"blue.400"}
-                  color={"white"}
-                  _hover={{
-                    bg: "blue.500",
-                  }}
-                >
-                  Sign up
-                </Button>
+                {loading ? (
+                  <Button
+                    isLoading
+                    loadingText="Submitting"
+                    bg={"blue.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Sign up
+                  </Button>
+                ) : (
+                  <Button
+                    onClick={handleSubmit}
+                    loadingText="Submitting"
+                    size="lg"
+                    bg={"blue.400"}
+                    color={"white"}
+                    _hover={{
+                      bg: "blue.500",
+                    }}
+                  >
+                    Sign up
+                  </Button>
+                )}
               </Stack>
               <Stack pt={3} display={"flex"}>
                 <Text

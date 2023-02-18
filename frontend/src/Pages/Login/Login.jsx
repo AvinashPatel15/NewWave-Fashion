@@ -30,15 +30,14 @@ const Login = () => {
   const [formData, setFormData] = useState(initState);
   const toast = useToast();
   const navigate = useNavigate();
-
-  // Loading
-  let [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     setLoading(true);
     try {
       let res = await fetch(
