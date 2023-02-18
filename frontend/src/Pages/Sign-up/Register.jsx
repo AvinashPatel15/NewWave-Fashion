@@ -49,7 +49,7 @@ const Register = () => {
   const handleSubmit = async () => {
     try {
       let res = await fetch(
-        "https://new-wave-fashion-server.cyclic.app/users/register",
+        `${process.env.REACT_APP_BACKEND_URL}/users/register`,
         {
           method: "POST",
           body: JSON.stringify(formData),

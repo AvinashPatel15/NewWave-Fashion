@@ -41,8 +41,8 @@ const Navbar = () => {
   const [refresh, setRefresh] = useState(true);
 
   let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
-  let firstName = tokenData.first_name || null;
-  let lastName = tokenData.last_name || null;
+  let firstName = tokenData.firstName || null;
+  let lastName = tokenData.lastName || null;
   let name = firstName + " " + lastName;
   let email = tokenData.email || null;
 

@@ -19,4 +19,6 @@ export const AuthLogin = (loginData) => async (dispatch) => {
   }
 };
 
-export const Logout = () => ({ type: LOGOUT });
+export const AuthLogout = () => (dispatch) => {
+  dispatch({ type: LOGOUT });
+};
