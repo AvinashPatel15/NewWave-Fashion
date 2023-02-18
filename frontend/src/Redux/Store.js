@@ -1,9 +1,6 @@
 import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
 import thunk from "redux-thunk";
-import { AuthReducer } from "./Login/Auth.Reducer";
 
-const globalReducer = combineReducers({
-  userLogin: AuthReducer,
-});
+const globalReducer = combineReducers({});
 
 export const store = legacy_createStore(globalReducer, applyMiddleware(thunk));

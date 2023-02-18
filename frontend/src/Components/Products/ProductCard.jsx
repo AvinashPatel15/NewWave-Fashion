@@ -12,15 +12,24 @@ import { AiFillHeart } from "react-icons/ai";
 import { BsCartPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 
-const ProductCard = ({ title, brand, color, price, discount, images }) => {
+const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
   let discountPrice = (price * discount) / 100;
-  let finalPrice = Math.abs(price - discountPrice);
+  let finalPrice = Math.round(price - discountPrice);
 
   return (
     <>
-      <GridItem borderRadius={5} backgroundColor={"#F7F8F7"}>
+      <GridItem
+        borderRadius={5}
+        backgroundColor={"#F7F8F7"}
+        border={"1px solid black"}
+        _hover={{
+          boxShadow:
+            "rgba(6, 24, 44, 0.4) 0px 0px 0px 3px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset",
+        }}
+        transition={"all 0.5s"}
+      >
         <Box>
-          <Link to={"/detail-page"} target="_blank">
+          <Link to={`/detail-page/${_id}`}>
             <Box
               width={"100%"}
               height={"300px"}
@@ -37,9 +46,9 @@ const ProductCard = ({ title, brand, color, price, discount, images }) => {
           </Link>
 
           <Box padding={4}>
-            <Link to={"/detail-page"} target="_blank">
+            <Link to={`/detail-page/${_id}`}>
               <Text fontSize={15} fontWeight={600} lineHeight={1}>
-                {title}
+                {title.slice(0, 35) + "..."}
               </Text>
             </Link>
 

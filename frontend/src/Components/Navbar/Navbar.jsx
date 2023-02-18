@@ -428,12 +428,12 @@ const NAV_ITEMS = [
       },
     ],
   },
-  {
-    label: "Girls",
-    href: "/products",
-  },
-  {
-    label: "Boys",
-    href: "/products",
-  },
+  // {
+  //   label: "Girls",
+  //   href: "/products",
+  // },
+  // {
+  //   label: "Boys",
+  //   href: "/products",
+  // },
 ];
