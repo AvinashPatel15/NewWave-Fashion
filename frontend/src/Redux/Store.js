@@ -1,6 +1,6 @@
-import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
-import thunk from "redux-thunk";
+// import { legacy_createStore, applyMiddleware, combineReducers } from "redux";
+// import thunk from "redux-thunk";
 
-const globalReducer = combineReducers({});
+// const globalReducer = combineReducers({});
 
-export const store = legacy_createStore(globalReducer, applyMiddleware(thunk));
+// export const store = legacy_createStore(globalReducer, applyMiddleware(thunk));

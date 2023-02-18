@@ -1,10 +1,10 @@
 import React from "react";
 import { Box } from "@chakra-ui/react";
 
-const ProductsImg = () => {
+const ProductsImg = ({ images }) => {
   return (
     <>
-      <Box>Product Page</Box>
+      <Box>HEllo World</Box>
     </>
   );
 };

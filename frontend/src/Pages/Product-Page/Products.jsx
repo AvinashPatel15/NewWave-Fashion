@@ -110,7 +110,7 @@ const Products = () => {
               gap={10}
             >
               {Products &&
-                Products.map((ele) => <ProductCard key={ele.id} {...ele} />)}
+                Products.map((ele) => <ProductCard key={ele._id} {...ele} />)}
             </Grid>
           )}
         </Box>
