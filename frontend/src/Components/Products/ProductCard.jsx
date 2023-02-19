@@ -6,6 +6,7 @@ import {
   Text,
   Icon,
   Button,
+  useToast,
 } from "@chakra-ui/react";
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
@@ -15,6 +16,51 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
   let discountPrice = (price * discount) / 100;
   let finalPrice = Math.round(price - discountPrice);
+
+  const toast = useToast();
+
+  const handleAddToCart = async (id) => {
+    let token = JSON.parse(localStorage.getItem("newwave")) || false;
+    try {
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/carts/post/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: token.token || false,
+          },
+        }
+      );
+      let resData = await res.json();
+      if (res.status >= 400) {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "error",
+          duration: 2000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "success",
+          duration: 2000,
+          isClosable: false,
+        });
+      }
+    } catch (error) {
+      console.log(error);
+      toast({
+        position: "top",
+        description: error.message,
+        status: "error",
+        duration: 2000,
+        isClosable: false,
+      });
+    }
+  };
 
   return (
     <>
@@ -77,9 +123,9 @@ const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
               <Text fontSize={25} fontWeight={700}>
                 ₹{finalPrice}
               </Text>
-              <Text fontSize={20} fontWeight={600}>
-                <strike>₹{price}</strike>
-              </Text>
+              <Box fontSize={20} fontWeight={600}>
+                <del>₹{price}</del>
+              </Box>
               <Text fontSize={20} fontWeight={700} color={"green.600"}>
                 {discount}% off
               </Text>
@@ -91,6 +137,7 @@ const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
                 variant="outline"
                 leftIcon={<BsCartPlusFill />}
                 fontWeight={700}
+                onClick={() => handleAddToCart(_id)}
               >
                 Add To Cart
               </Button>

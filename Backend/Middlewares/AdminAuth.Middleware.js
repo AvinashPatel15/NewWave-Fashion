@@ -9,9 +9,7 @@ const AdminAuth = (req, res, next) => {
     /** Verify Our Token With The Help Of jwt.verify */
     jwt.verify(token, process.env.JWTKey, async (err, decoded) => {
       if (err) {
-        res
-          .status(401)
-          .send({ message: "Invalid Token Please Login Again", err });
+        res.status(401).send({ message: "Please Login First", err });
       } else {
         const userID = decoded.userID;
         let isAdmin = await UserModel.findOne({ _id: userID });
