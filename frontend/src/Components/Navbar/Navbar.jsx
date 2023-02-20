@@ -185,7 +185,6 @@ const Navbar = () => {
                   <>
                     <MenuItem>{name}</MenuItem>
                     <MenuItem>{email}</MenuItem>
-                    <MenuItem>Profile</MenuItem>
                     <MenuItem>Orders</MenuItem>
                   </>
                 )}
