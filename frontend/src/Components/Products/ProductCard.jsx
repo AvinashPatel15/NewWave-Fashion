@@ -11,11 +11,14 @@ import {
 import React from "react";
 import { AiFillHeart } from "react-icons/ai";
 import { BsCartPlusFill } from "react-icons/bs";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import { getLoadertotheCart } from "../../Redux/Cart/Cart.actionTypes";
 
 const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
   let discountPrice = (price * discount) / 100;
   let finalPrice = Math.round(price - discountPrice);
+  const dispatch = useDispatch();
 
   const toast = useToast();
 
@@ -50,6 +53,7 @@ const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
           isClosable: false,
         });
       }
+      dispatch({ type: getLoadertotheCart });
     } catch (error) {
       console.log(error);
       toast({

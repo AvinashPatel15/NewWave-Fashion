@@ -7,7 +7,7 @@ const getCart = async (req, res) => {
     if (cart.length > 0) {
       res.send(cart);
     } else {
-      res.send({ message: "No item added to the cart" });
+      res.send({ message: "No item in the cart" });
     }
   } catch (error) {
     res

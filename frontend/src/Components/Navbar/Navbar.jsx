@@ -33,12 +33,16 @@ import { Link } from "react-router-dom";
 import { GoSearch } from "react-icons/go";
 import { AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 import nwlogo2 from "../../Assets/nwlogo2.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Logout from "./Logout";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../../Redux/Cart/Cart.actions";
 
 const Navbar = () => {
+  const {carts, loader} = useSelector((store) => store.cartReducerData)
   const { isOpen, onToggle } = useDisclosure();
   const [refresh, setRefresh] = useState(true);
+  const dispatch = useDispatch()
 
   let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
   let firstName = tokenData.firstName || null;
@@ -50,6 +54,11 @@ const Navbar = () => {
     localStorage.clear("localmart");
     setRefresh(!refresh);
   };
+
+  useEffect(() =>{
+    dispatch(getCartData())
+  }, [loader])
+
 
   return (
     <>
@@ -159,7 +168,7 @@ const Navbar = () => {
                     borderRadius={"full"}
                     px={"2px"}
                   >
-                    {10}
+                    {carts.length}
                   </Text>
                 </Box>
               </Link>
@@ -188,18 +197,23 @@ const Navbar = () => {
                     <MenuItem>Orders</MenuItem>
                   </>
                 )}
-                <MenuItem
-                  display={{ base: "flex", lg: "none" }}
-                  icon={<AiOutlineHeart size={20} />}
-                >
-                  Wishlist
-                </MenuItem>
-                <MenuItem
-                  display={{ base: "flex", lg: "none" }}
-                  icon={<AiOutlineShoppingCart size={20} />}
-                >
-                  Cart
-                </MenuItem>
+                <Link to={"/wishlist"}>
+                  <MenuItem
+                    display={{ base: "flex", lg: "none" }}
+                    icon={<AiOutlineHeart size={20} />}
+                  >
+                    Wishlist
+                  </MenuItem>
+                </Link>
+
+                <Link to={"/cart"}>
+                  <MenuItem
+                    display={{ base: "flex", lg: "none" }}
+                    icon={<AiOutlineShoppingCart size={20} />}
+                  >
+                    Cart
+                  </MenuItem>
+                </Link>
                 {tokenData ? (
                   <>
                     <MenuDivider />
