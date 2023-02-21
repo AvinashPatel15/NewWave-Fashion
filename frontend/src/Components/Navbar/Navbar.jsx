@@ -39,10 +39,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 
 const Navbar = () => {
-  const {carts, loader} = useSelector((store) => store.cartReducerData)
+  const { carts, loader } = useSelector((store) => store.cartReducerData);
   const { isOpen, onToggle } = useDisclosure();
   const [refresh, setRefresh] = useState(true);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
   let firstName = tokenData.firstName || null;
@@ -52,13 +52,13 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.clear("localmart");
+    window.location.reload(false);
     setRefresh(!refresh);
   };
 
-  useEffect(() =>{
-    dispatch(getCartData())
-  }, [loader])
-
+  useEffect(() => {
+    dispatch(getCartData());
+  }, [loader]);
 
   return (
     <>

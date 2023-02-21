@@ -1,5 +1,5 @@
 import { Box, Image } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
 import homepage1 from "../../Assets/homepage1.jpg";
@@ -15,8 +15,15 @@ import Section7 from "../../Components/HomePage/Section7";
 import Section8 from "../../Components/HomePage/Section8";
 import Section9 from "../../Components/HomePage/Section9";
 import TopSection from "../../Components/HomePage/TopSection";
+import { useDispatch, useSelector } from "react-redux";
+import { getCartData } from "../../Redux/Cart/Cart.actions";
 
 const Home = () => {
+  // const { carts, isLoading } = useSelector((store) => store.cartReducerData);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getCartData());
+  }, []);
   return (
     <>
       {/* Navbar */}

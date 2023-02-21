@@ -19,8 +19,8 @@ const Cart = () => {
   for (let i = 0; i < carts.length; i++) {
     cartPrice = cartPrice + carts[i].productID.price * carts[i].productCOUNT;
   }
+  
 
-  console.log(carts);
   return (
     <>
       <Navbar />
