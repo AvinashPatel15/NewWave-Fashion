@@ -5,6 +5,7 @@ import {
   ButtonGroup,
   Heading,
   Text,
+  useToast,
 } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
@@ -15,6 +16,8 @@ import ProductsImg from "../../Components/Product-Detail-Page/ProductsImg";
 import Loader from "../../Components/Loader/Loader";
 import { BsCartPlusFill } from "react-icons/bs";
 import { AiFillHeart } from "react-icons/ai";
+import { useDispatch } from "react-redux";
+import { getLoadertotheCart } from "../../Redux/Cart/Cart.actionTypes";
 
 const DetailPage = () => {
   const { id } = useParams();
@@ -22,6 +25,10 @@ const DetailPage = () => {
   const [loading, setLoading] = useState(false);
   const [size, setSize] = useState("");
   const [flag, setFlag] = useState(false);
+
+  const dispatch = useDispatch();
+
+  const toast = useToast();
 
   const sizeButton = ["S", "M", "L", "XL"];
 
@@ -53,6 +60,50 @@ const DetailPage = () => {
   useEffect(() => {
     getData();
   }, []);
+
+  const handleAddToCart = async (id) => {
+    let token = JSON.parse(localStorage.getItem("newwave")) || false;
+    try {
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/carts/post/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            authorization: token.token || false,
+          },
+        }
+      );
+      let resData = await res.json();
+      if (res.status >= 400) {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "error",
+          duration: 2000,
+          isClosable: false,
+        });
+      } else {
+        toast({
+          position: "top",
+          description: resData.message,
+          status: "success",
+          duration: 2000,
+          isClosable: false,
+        });
+      }
+      dispatch({ type: getLoadertotheCart });
+    } catch (error) {
+      console.log(error);
+      toast({
+        position: "top",
+        description: error.message,
+        status: "error",
+        duration: 2000,
+        isClosable: false,
+      });
+    }
+  };
 
   return (
     <>
@@ -201,7 +252,11 @@ const DetailPage = () => {
 
                       <Box mt={3} fontSize={"small"}>
                         {flag ? (
-                          <Box display={"flex"} flexDirection={"column"} gap={1}>
+                          <Box
+                            display={"flex"}
+                            flexDirection={"column"}
+                            gap={1}
+                          >
                             <Text fontSize={20}>
                               You Have selected size {size}
                             </Text>
@@ -238,6 +293,7 @@ const DetailPage = () => {
                       fontWeight={700}
                       fontSize={20}
                       padding={5}
+                      onClick={() => handleAddToCart(Products._id)}
                     >
                       Add To Cart
                     </Button>

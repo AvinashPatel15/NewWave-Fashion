@@ -3,6 +3,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import CartProductCard from "../../Components/Cart/CartProductCard";
+import DeleteCartItemButton from "../../Components/Cart/DeleteCartItemButton";
 import Loader from "../../Components/Loader/Loader";
 import Navbar from "../../Components/Navbar/Navbar";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
@@ -19,7 +20,15 @@ const Cart = () => {
   for (let i = 0; i < carts.length; i++) {
     cartPrice = cartPrice + carts[i].productID.price * carts[i].productCOUNT;
   }
-  
+
+  let cartDiscount = 0;
+  for (let i = 0; i < carts.length; i++) {
+    cartDiscount =
+      cartDiscount + carts[i].productID.discount * carts[i].productCOUNT;
+  }
+
+  let cartDiscountPrice = (cartPrice * cartDiscount) / 100;
+  let cartFinalPrice = Math.round(cartPrice - cartDiscountPrice);
 
   return (
     <>
@@ -45,9 +54,10 @@ const Cart = () => {
                     No Items In The Cart
                   </Text>
                   <Link to={"/"}>
-                    <Button colorScheme="purple" variant="outline">
+                    {/* <Button colorScheme="purple" variant="outline">
                       Back To Home
-                    </Button>
+                    </Button> */}
+                    <DeleteCartItemButton value={"Back To Home"} />
                   </Link>
                 </Box>
               ) : (
@@ -91,7 +101,7 @@ const Cart = () => {
                       position={"sticky"}
                       top={{ md: 20 }}
                     >
-                      {cartPrice}
+                      {Math.abs(cartFinalPrice)}
                     </Box>
                   </Box>
                 </>

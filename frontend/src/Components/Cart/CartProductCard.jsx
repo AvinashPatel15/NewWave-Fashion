@@ -1,4 +1,5 @@
 import { Box, Button, Image, Text } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
@@ -7,6 +8,7 @@ import {
   deleteCartItem,
   getCartData,
 } from "../../Redux/Cart/Cart.actions";
+import { MdDeleteForever } from "react-icons/md";
 
 const CartProductCard = ({ productID, productCOUNT, _id }) => {
   let discountPrice = (productID.price * productID.discount) / 100;
@@ -44,28 +46,35 @@ const CartProductCard = ({ productID, productCOUNT, _id }) => {
             alignItems={"center"}
           >
             <Box width={"100px"} overflow={"hidden"}>
-              <Image
-                src={productID.images[0].url}
-                width={"100%"}
-                height={"auto"}
-                objectFit={"contain"}
-                borderRadius={10}
-                border={"3px solid black"}
-                transition={"0.3s all ease-in-out"}
-                _hover={{
-                  transform: "scale(1.05)",
-                  transformOrigin: "center",
-                }}
-              />
+              <Link to={`/detail-page/${productID._id}`}>
+                <Image
+                  src={productID.images[0].url}
+                  width={"100%"}
+                  height={"auto"}
+                  objectFit={"cover"}
+                  objectPosition={"center"}
+                  borderRadius={10}
+                  border={"3px solid black"}
+                  transition={"0.3s all ease-in-out"}
+                  _hover={{
+                    transform: "scale(1.05)",
+                    transformOrigin: "center",
+                  }}
+                />
+              </Link>
             </Box>
 
             <Box>
               <Text fontSize={17} fontWeight={500} color={"blackAlpha.700"}>
                 {productID.brand}
               </Text>
-              <Text fontSize={17} fontWeight={500} color={"blackAlpha.700"}>
-                {productID.title}
-              </Text>
+
+              <Link to={`/detail-page/${productID._id}`}>
+                <Text fontSize={17} fontWeight={500} color={"blackAlpha.700"}>
+                  {productID.title.slice(0, 20) + "..."}
+                </Text>
+              </Link>
+
               <Text fontSize={20} fontWeight={600} color={"blackAlpha.800"}>
                 ₹{finalPrice}
               </Text>
@@ -104,6 +113,7 @@ const CartProductCard = ({ productID, productCOUNT, _id }) => {
 
             <Box display={"flex"}>
               <Button
+                leftIcon={<MdDeleteForever />}
                 colorScheme="purple"
                 variant="outline"
                 onClick={() => handleDeleteItem(_id)}
