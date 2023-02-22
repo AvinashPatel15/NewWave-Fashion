@@ -7,6 +7,7 @@ import Login from "../Pages/Login/Login";
 import Products from "../Pages/Product-Page/Products";
 import DetailPage from "../Pages/Product-Page/DetailPage";
 import Cart from "../Pages/Cart/Cart";
+import Error404main from "../Components/404-Error/Error404main";
 
 const AllRoutes = () => {
   return (
@@ -18,6 +19,7 @@ const AllRoutes = () => {
       <Route path="/products" element={<Products />} />
       <Route path="/detail-Page/:id" element={<DetailPage />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="*" element={<Error404main />} />
     </Routes>
   );
 };

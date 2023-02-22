@@ -33,7 +33,12 @@ const CartProductCard = ({ productID, productCOUNT, _id }) => {
 
   return (
     <>
-      <Box border={"1px solid grey"} borderRadius={10} padding={5}>
+      <Box
+        border={"1px solid grey"}
+        borderRadius={10}
+        padding={5}
+        width={"100%"}
+      >
         <Box
           display={"grid"}
           gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)" }}
@@ -74,10 +79,14 @@ const CartProductCard = ({ productID, productCOUNT, _id }) => {
                   {productID.title.slice(0, 20) + "..."}
                 </Text>
               </Link>
-
-              <Text fontSize={20} fontWeight={600} color={"blackAlpha.800"}>
-                ₹{finalPrice}
-              </Text>
+              <Box>
+                <Text fontSize={20} fontWeight={600} color={"blackAlpha.800"}>
+                  ₹{finalPrice}
+                </Text>
+                <Text fontSize={17} fontWeight={600} color={"blackAlpha.800"}>
+                  SubTotal : ₹{finalPrice * productCOUNT}
+                </Text>
+              </Box>
             </Box>
           </Box>
 

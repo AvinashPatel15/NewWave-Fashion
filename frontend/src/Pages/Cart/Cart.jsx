@@ -1,7 +1,8 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import CartPrice from "../../Components/Cart/CartPrice";
 import CartProductCard from "../../Components/Cart/CartProductCard";
 import DeleteCartItemButton from "../../Components/Cart/DeleteCartItemButton";
 import Loader from "../../Components/Loader/Loader";
@@ -16,19 +17,16 @@ const Cart = () => {
     dispatch(getCartData());
   }, []);
 
-  let cartPrice = 0;
+  let DiscountPrice = 0;
   for (let i = 0; i < carts.length; i++) {
-    cartPrice = cartPrice + carts[i].productID.price * carts[i].productCOUNT;
+    let CartPrice = 0;
+    CartPrice =
+      CartPrice +
+      (carts[i].productID.price * carts[i].productID.discount) / 100;
+    DiscountPrice =
+      DiscountPrice +
+      Math.abs(carts[i].productID.price - CartPrice) * carts[i].productCOUNT;
   }
-
-  let cartDiscount = 0;
-  for (let i = 0; i < carts.length; i++) {
-    cartDiscount =
-      cartDiscount + carts[i].productID.discount * carts[i].productCOUNT;
-  }
-
-  let cartDiscountPrice = (cartPrice * cartDiscount) / 100;
-  let cartFinalPrice = Math.round(cartPrice - cartDiscountPrice);
 
   return (
     <>
@@ -54,9 +52,6 @@ const Cart = () => {
                     No Items In The Cart
                   </Text>
                   <Link to={"/"}>
-                    {/* <Button colorScheme="purple" variant="outline">
-                      Back To Home
-                    </Button> */}
                     <DeleteCartItemButton value={"Back To Home"} />
                   </Link>
                 </Box>
@@ -82,9 +77,8 @@ const Cart = () => {
                   </Box>
 
                   <Box
-                    border={"1px solid red"}
                     display={"flex"}
-                    flexDirection={{ base: "column", md: "row" }}
+                    flexDirection={{ base: "column", lg: "row" }}
                     gap={5}
                   >
                     <Box display={"flex"} flexDirection={"column"} gap={5}>
@@ -95,13 +89,13 @@ const Cart = () => {
                     </Box>
 
                     <Box
-                      border={"1px solid black"}
-                      height={"200px"}
-                      width={"400px"}
+                      border={"1px solid grey"}
+                      borderRadius={10}
+                      width={{ base: "100%", lg: "350px" }}
                       position={"sticky"}
                       top={{ md: 20 }}
                     >
-                      {Math.abs(cartFinalPrice)}
+                      <CartPrice totalPrice={Math.round(DiscountPrice)} />
                     </Box>
                   </Box>
                 </>
