@@ -8,6 +8,7 @@ import Products from "../Pages/Product-Page/Products";
 import DetailPage from "../Pages/Product-Page/DetailPage";
 import Cart from "../Pages/Cart/Cart";
 import Error404main from "../Components/404-Error/Error404main";
+import PrivateRoute from "./PrivateRoute";
 
 const AllRoutes = () => {
   return (
@@ -18,7 +19,14 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/products" element={<Products />} />
       <Route path="/detail-Page/:id" element={<DetailPage />} />
-      <Route path="/cart" element={<Cart />} />
+      <Route
+        path="/cart"
+        element={
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        }
+      />
       <Route path="*" element={<Error404main />} />
     </Routes>
   );

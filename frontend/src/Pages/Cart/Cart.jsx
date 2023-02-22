@@ -1,4 +1,4 @@
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -48,6 +48,11 @@ const Cart = () => {
                   alignItems={"center"}
                   height={"50vh"}
                 >
+                  <Image
+                    src="https://images.meesho.com/images/pow/empty-cart.png"
+                    width={"263px"}
+                    height={"250px"}
+                  />
                   <Text fontSize={25} fontWeight={600}>
                     No Items In The Cart
                   </Text>
