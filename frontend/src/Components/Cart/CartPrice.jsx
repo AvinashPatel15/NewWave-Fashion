@@ -1,4 +1,5 @@
-import { Box, Text } from "@chakra-ui/react";
+import { ArrowForwardIcon } from "@chakra-ui/icons";
+import { Box, Button, Text } from "@chakra-ui/react";
 import React from "react";
 
 const CartPrice = ({ totalPrice }) => {
@@ -23,6 +24,22 @@ const CartPrice = ({ totalPrice }) => {
 
             <Text fontSize={17} fontWeight={500} color={"blackAlpha.800"}>
               ₹ {totalPrice}.00
+            </Text>
+          </Box>
+
+          <Box
+            display={"flex"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            paddingY={{ base: 2, md: 3 }}
+            borderBottom={"1px solid black"}
+          >
+            <Text fontSize={17} fontWeight={500} color={"blackAlpha.800"}>
+              Total Discount
+            </Text>
+
+            <Text fontSize={17} fontWeight={500} color={"blackAlpha.800"}>
+              ₹ -50.00
             </Text>
           </Box>
 
@@ -69,19 +86,19 @@ const CartPrice = ({ totalPrice }) => {
             </Text>
 
             <Text fontSize={17} fontWeight={500}>
-              ₹ {totalPrice + 250 + 250}.00
+              ₹ {totalPrice + 250 + 250 - 50}.00
             </Text>
           </Box>
 
           <Box
             width={"100%"}
             display={"flex"}
-            justifyContent={"space-between"}
+            justifyContent={"center"}
             alignItems={"center"}
-            textAlign={"center"}
             paddingY={{ base: 2, md: 3 }}
           >
             <Text
+              width={"100%"}
               fontSize={13.5}
               fontWeight={500}
               textAlign={"center"}
@@ -91,6 +108,26 @@ const CartPrice = ({ totalPrice }) => {
             >
               Clicking on ‘Continue’ will not deduct any money
             </Text>
+          </Box>
+
+          <Box
+            display={"flex"}
+            justifyContent={"center"}
+            alignItems={"center"}
+            paddingY={{ base: 2, md: 3 }}
+          >
+            <Button
+              rightIcon={<ArrowForwardIcon />}
+              colorScheme="purple"
+              variant="outline"
+              width={"100%"}
+              display={"flex"}
+              justifyContent={"center"}
+              alignItems={"center"}
+              fontSize={20}
+            >
+              Continue
+            </Button>
           </Box>
         </Box>
       </Box>

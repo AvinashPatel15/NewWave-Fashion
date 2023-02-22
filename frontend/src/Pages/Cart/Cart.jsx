@@ -80,6 +80,7 @@ const Cart = () => {
                     display={"flex"}
                     flexDirection={{ base: "column", lg: "row" }}
                     gap={5}
+                    marginBottom={20}
                   >
                     <Box display={"flex"} flexDirection={"column"} gap={5}>
                       {carts &&
@@ -92,6 +93,7 @@ const Cart = () => {
                       border={"1px solid grey"}
                       borderRadius={10}
                       width={{ base: "100%", lg: "350px" }}
+                      height={{ base: "370px", lg: "420px" }}
                       position={"sticky"}
                       top={{ md: 20 }}
                     >
