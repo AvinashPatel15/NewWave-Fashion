@@ -89,6 +89,27 @@ const Register = () => {
     }
   };
 
+  // const getPincodeData = async (e) => {
+  //   if (e.target.value.length === 6) {
+  //     const resp = await fetch(
+  //       `https://api.postalpincode.in/pincode/${e.target.value}`
+  //     );
+  //     const pinData = await resp.json();
+
+  //     if (pinData[0].Status === "Success") {
+  //       setFormData({
+  //         ...formData,
+  //         state: pinData[0].PostOffice[0].State,
+  //         city: pinData[0].PostOffice[0].District,
+  //         pincode: e.target.value,
+  //       });
+  //     } else if (pinData[0].Status !== "Success") {
+  //       alert("Enter Correct PinCode");
+  //       setFormData({ ...formData, state: "", city: "", pincode: "" });
+  //     }
+  //   }
+  // };
+
   return (
     <Box
       backgroundImage={signupbackground}

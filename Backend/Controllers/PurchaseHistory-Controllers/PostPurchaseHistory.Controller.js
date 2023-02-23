@@ -2,13 +2,26 @@ const { CartModel } = require("../../Models/Cart.Model");
 const { PurchaseHistoryModel } = require("../../Models/PurchaseHistory.Model");
 
 const postPurchaseHistory = async (req, res) => {
+  const { name, number, pincode, city, state, country } = req.body;
   const userID = req.userID;
   try {
     const cart = await CartModel.find({ userID });
     if (cart.length === 0) {
       res.status(401).send({ message: "Your Cart Is Empty" });
     } else {
-      await PurchaseHistoryModel.insertMany(cart);
+      for (let i = 0; i < cart.length; i++) {
+        await PurchaseHistoryModel.insertMany({
+          userID: cart[i].userID,
+          productID: cart[i].productID,
+          productCOUNT: cart[i].productCOUNT,
+          name,
+          number,
+          pincode,
+          city,
+          state,
+          country,
+        });
+      }
       await CartModel.deleteMany({ userID });
       res.send({ message: "Successfully Purchase" });
     }
