@@ -29,17 +29,6 @@ userRouter.post(
     body("last_name", "Please Enter Your Last Name").not().isEmpty(),
     body("age", "Please Enter Your Age").not().isEmpty(),
     body("gender", "Please Verify Your Gender").not().isEmpty(),
-    body("phone", "Please Enter Valid Phone Number").isLength({
-      min: 10,
-      max: 10,
-    }),
-    body("pincode", "Enter Correct City Pincode").isLength({
-      min: 6,
-      max: 6,
-    }),
-    body("address", "Please Enter Your Address").not().isEmpty(),
-    body("city", "Please Enter Your City Name").not().isEmpty(),
-    body("state", "Please Enter Your State Name").not().isEmpty(),
     body("email", "Please Enter A Valid Email Address").isEmail(),
     body("password", "Password Must Be 8 Characters").isLength({ min: 8 }),
   ],

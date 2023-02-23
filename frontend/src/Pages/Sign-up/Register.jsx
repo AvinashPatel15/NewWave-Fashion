@@ -26,11 +26,6 @@ const initState = {
   last_name: "",
   age: "",
   gender: "",
-  phone: "",
-  pincode: "",
-  address: "",
-  city: "",
-  state: "",
   email: "",
   password: "",
 };
@@ -91,27 +86,6 @@ const Register = () => {
         duration: 2000,
         isClosable: false,
       });
-    }
-  };
-
-  const getPincodeData = async (e) => {
-    if (e.target.value.length === 6) {
-      const resp = await fetch(
-        `https://api.postalpincode.in/pincode/${e.target.value}`
-      );
-      const pinData = await resp.json();
-
-      if (pinData[0].Status === "Success") {
-        setFormData({
-          ...formData,
-          state: pinData[0].PostOffice[0].State,
-          city: pinData[0].PostOffice[0].District,
-          pincode: e.target.value,
-        });
-      } else if (pinData[0].Status !== "Success") {
-        alert("Enter Correct PinCode");
-        setFormData({ ...formData, state: "", city: "", pincode: "" });
-      }
     }
   };
 
@@ -205,68 +179,6 @@ const Register = () => {
                       <option value="female">Female</option>
                       <option value="Other">Other</option>
                     </Select>
-                  </FormControl>
-                </Box>
-              </HStack>
-              <HStack>
-                <Box>
-                  <FormControl id="Phone" isRequired>
-                    <FormLabel>Phone Number</FormLabel>
-                    <Input
-                      type="number"
-                      name="phone"
-                      placeholder="Enter Phone Number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                    />
-                  </FormControl>
-                </Box>
-                <Box>
-                  <FormControl id="pincode" isRequired>
-                    <FormLabel>Pincode / ZIP</FormLabel>
-                    <Input
-                      type="text"
-                      name="pincode"
-                      placeholder="Enter Pincode"
-                      onChange={getPincodeData}
-                      required
-                    />
-                  </FormControl>
-                </Box>
-              </HStack>
-              <FormControl id="addess" isRequired>
-                <FormLabel>Address</FormLabel>
-                <Input
-                  type="text"
-                  name="address"
-                  placeholder="Enter Your Address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  required
-                />
-              </FormControl>
-              <HStack>
-                <Box>
-                  <FormControl id="city" isRequired isReadOnly>
-                    <FormLabel>City</FormLabel>
-                    <Input
-                      type="text"
-                      name="city"
-                      placeholder="Waiting For Pincode"
-                      value={formData.city}
-                    />
-                  </FormControl>
-                </Box>
-                <Box>
-                  <FormControl id="state" isRequired isReadOnly>
-                    <FormLabel>State</FormLabel>
-                    <Input
-                      type="text"
-                      name="state"
-                      placeholder="Waiting For Pincode"
-                      value={formData.state}
-                    />
                   </FormControl>
                 </Box>
               </HStack>
