@@ -97,7 +97,6 @@ const ProductCard = ({ _id, title, brand, color, price, discount, images }) => {
           isClosable: false,
         });
       }
-      dispatch({ type: getLoadertotheCart });
     } catch (error) {
       console.log(error);
       toast({

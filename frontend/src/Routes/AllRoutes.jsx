@@ -9,6 +9,7 @@ import DetailPage from "../Pages/Product-Page/DetailPage";
 import Cart from "../Pages/Cart/Cart";
 import Error404main from "../Components/404-Error/Error404main";
 import PrivateRoute from "./PrivateRoute";
+import Wishlist from "../Pages/Wishlist/Wishlist";
 
 const AllRoutes = () => {
   return (
@@ -24,6 +25,14 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/wishlist"
+        element={
+          <PrivateRoute>
+            <Wishlist />
           </PrivateRoute>
         }
       />

@@ -86,7 +86,7 @@ const CartPrice = ({ totalPrice }) => {
             </Text>
 
             <Text fontSize={17} fontWeight={500}>
-              ₹ {totalPrice + 250 + 250 - 50}.00
+              ₹ {totalPrice - 50 + 100 + 250}.00
             </Text>
           </Box>
 
