@@ -22,49 +22,6 @@ const WishlistProductCard = ({ productID, _id }) => {
     dispatch(getWishlistData());
   };
 
-  const handleAddToCart = async (id) => {
-    let token = JSON.parse(localStorage.getItem("newwave")) || false;
-    try {
-      let res = await fetch(
-        `${process.env.REACT_APP_BACKEND_URL}/carts/post/${id}`,
-        {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            authorization: token.token || false,
-          },
-        }
-      );
-      let resData = await res.json();
-      if (res.status >= 400) {
-        toast({
-          position: "top",
-          description: resData.message,
-          status: "error",
-          duration: 2000,
-          isClosable: false,
-        });
-      } else {
-        toast({
-          position: "top",
-          description: resData.message,
-          status: "success",
-          duration: 2000,
-          isClosable: false,
-        });
-      }
-      dispatch({ type: getLoadertotheCart });
-    } catch (error) {
-      console.log(error);
-      toast({
-        position: "top",
-        description: error.message,
-        status: "error",
-        duration: 2000,
-        isClosable: false,
-      });
-    }
-  };
   return (
     <>
       <Box
@@ -74,8 +31,9 @@ const WishlistProductCard = ({ productID, _id }) => {
         width={"100%"}
       >
         <Box
-          display={"grid"}
-          gridTemplateColumns={{ base: "repeat(1,1fr)", md: "repeat(2,1fr)" }}
+          display={"flex"}
+          justifyContent={"space-between"}
+          flexDirection={{ base: "column", md: "row" }}
           gap={{ base: 5, md: 0 }}
         >
           <Box
@@ -134,20 +92,10 @@ const WishlistProductCard = ({ productID, _id }) => {
 
           <Box
             display={"flex"}
-            justifyContent={{ base: "flex-start", md: "flex-end" }}
+            justifyContent={{ base: "center", md: "flex-end" }}
             alignItems={"center"}
             gap={7}
           >
-            <Box display={"flex"}>
-              <Button
-                leftIcon={<BsCartPlusFill />}
-                colorScheme="purple"
-                variant="outline"
-                onClick={() => handleAddToCart(_id)}
-              >
-                Add To Cart
-              </Button>
-            </Box>
             <Box display={"flex"}>
               <Button
                 leftIcon={<MdDeleteForever />}

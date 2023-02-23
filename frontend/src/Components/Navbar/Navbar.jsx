@@ -37,6 +37,7 @@ import { useEffect, useState } from "react";
 import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
+import { BsBagCheck } from "react-icons/bs";
 
 const Navbar = () => {
   const { carts, loader } = useSelector((store) => store.cartReducerData);
@@ -194,7 +195,7 @@ const Navbar = () => {
                   <>
                     <MenuItem>{name}</MenuItem>
                     <MenuItem>{email}</MenuItem>
-                    <MenuItem>Orders</MenuItem>
+                    <MenuItem icon={<BsBagCheck size={20} />}>Orders</MenuItem>
                   </>
                 )}
                 <Link to={"/wishlist"}>
