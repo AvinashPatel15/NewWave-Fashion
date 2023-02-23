@@ -2,7 +2,16 @@ const { CartModel } = require("../../Models/Cart.Model");
 const { PurchaseHistoryModel } = require("../../Models/PurchaseHistory.Model");
 
 const postPurchaseHistory = async (req, res) => {
-  const { name, number, pincode, city, state, country } = req.body;
+  const {
+    first_name,
+    last_name,
+    number,
+    address,
+    pincode,
+    city,
+    state,
+    country,
+  } = req.body;
   const userID = req.userID;
   try {
     const cart = await CartModel.find({ userID });
@@ -14,8 +23,10 @@ const postPurchaseHistory = async (req, res) => {
           userID: cart[i].userID,
           productID: cart[i].productID,
           productCOUNT: cart[i].productCOUNT,
-          name,
+          first_name,
+          last_name,
           number,
+          address,
           pincode,
           city,
           state,

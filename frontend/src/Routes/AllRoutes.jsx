@@ -11,6 +11,7 @@ import Error404main from "../Components/404-Error/Error404main";
 import PrivateRoute from "./PrivateRoute";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import Orders from "../Pages/Orders/Orders";
+import Checkout from "../Pages/Checkout-Page/Checkout";
 
 const AllRoutes = () => {
   return (
@@ -21,6 +22,7 @@ const AllRoutes = () => {
       <Route path="/login" element={<Login />} />
       <Route path="/products" element={<Products />} />
       <Route path="/detail-Page/:id" element={<DetailPage />} />
+
       <Route
         path="/cart"
         element={
@@ -29,6 +31,7 @@ const AllRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/wishlist"
         element={
@@ -37,11 +40,21 @@ const AllRoutes = () => {
           </PrivateRoute>
         }
       />
+
       <Route
         path="/orders"
         element={
           <PrivateRoute>
             <Orders />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/checkout"
+        element={
+          <PrivateRoute>
+            <Checkout />
           </PrivateRoute>
         }
       />

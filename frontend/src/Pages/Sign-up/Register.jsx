@@ -26,6 +26,11 @@ const initState = {
   last_name: "",
   age: "",
   gender: "",
+  // phone: "",
+  // pincode: "",
+  // address: "",
+  // city: "",
+  // state: "",
   email: "",
   password: "",
 };
@@ -203,6 +208,68 @@ const Register = () => {
                   </FormControl>
                 </Box>
               </HStack>
+              {/* <HStack>
+                <Box>
+                  <FormControl id="Phone" isRequired>
+                    <FormLabel>Phone Number</FormLabel>
+                    <Input
+                      type="number"
+                      name="phone"
+                      placeholder="Enter Phone Number"
+                      value={formData.phone}
+                      onChange={handleChange}
+                      required
+                    />
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl id="pincode" isRequired>
+                    <FormLabel>Pincode / ZIP</FormLabel>
+                    <Input
+                      type="text"
+                      name="pincode"
+                      placeholder="Enter Pincode"
+                      onChange={getPincodeData}
+                      required
+                    />
+                  </FormControl>
+                </Box>
+              </HStack>
+              <FormControl id="addess" isRequired>
+                <FormLabel>Address</FormLabel>
+                <Input
+                  type="text"
+                  name="address"
+                  placeholder="Enter Your Address"
+                  value={formData.address}
+                  onChange={handleChange}
+                  required
+                />
+              </FormControl>
+              <HStack>
+                <Box>
+                  <FormControl id="city" isRequired isReadOnly>
+                    <FormLabel>City</FormLabel>
+                    <Input
+                      type="text"
+                      name="city"
+                      placeholder="Waiting For Pincode"
+                      value={formData.city}
+                    />
+                  </FormControl>
+                </Box>
+                <Box>
+                  <FormControl id="state" isRequired isReadOnly>
+                    <FormLabel>State</FormLabel>
+                    <Input
+                      type="text"
+                      name="state"
+                      placeholder="Waiting For Pincode"
+                      value={formData.state}
+                    />
+                  </FormControl>
+                </Box>
+              </HStack> */}
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
                 <Input

@@ -1,6 +1,7 @@
 import { ArrowForwardIcon } from "@chakra-ui/icons";
 import { Box, Button, Text } from "@chakra-ui/react";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const CartPrice = ({ totalPrice }) => {
   return (
@@ -116,18 +117,20 @@ const CartPrice = ({ totalPrice }) => {
             alignItems={"center"}
             paddingY={{ base: 2, md: 3 }}
           >
-            <Button
-              rightIcon={<ArrowForwardIcon />}
-              colorScheme="purple"
-              variant="outline"
-              width={"100%"}
-              display={"flex"}
-              justifyContent={"center"}
-              alignItems={"center"}
-              fontSize={20}
-            >
-              Continue
-            </Button>
+            <Link to={"/checkout"}>
+              <Button
+                rightIcon={<ArrowForwardIcon />}
+                colorScheme="purple"
+                variant="outline"
+                width={"100%"}
+                display={"flex"}
+                justifyContent={"center"}
+                alignItems={"center"}
+                fontSize={20}
+              >
+                Continue
+              </Button>
+            </Link>
           </Box>
         </Box>
       </Box>

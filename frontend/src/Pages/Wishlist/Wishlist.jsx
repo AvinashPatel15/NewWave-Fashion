@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { Box, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import Navbar from "../../Components/Navbar/Navbar";
 import Loader from "../../Components/Loader/Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -40,6 +40,11 @@ const Wishlist = () => {
                   alignItems={"center"}
                   height={"50vh"}
                 >
+                  <Image
+                    src="https://img.freepik.com/free-vector/online-wishes-list-concept-illustration_114360-3632.jpg?w=740&t=st=1677182853~exp=1677183453~hmac=f940af9759f4192b2b8d195526535282d3a0f2a8c26c93a0a642531d7507e9c2"
+                    width={"263px"}
+                    height={"250px"}
+                  />
                   <Text fontSize={25} fontWeight={600}>
                     Your Wishlist is empty!!
                   </Text>
