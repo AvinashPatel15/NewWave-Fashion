@@ -12,6 +12,7 @@ import PrivateRoute from "./PrivateRoute";
 import Wishlist from "../Pages/Wishlist/Wishlist";
 import Orders from "../Pages/Orders/Orders";
 import Checkout from "../Pages/Checkout-Page/Checkout";
+import PaymentSuccess from "../Pages/Payment-Success/PaymentSuccess";
 
 const AllRoutes = () => {
   return (
@@ -55,6 +56,15 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Checkout />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/payment-success"
+        element={
+          <PrivateRoute>
+            <PaymentSuccess />
           </PrivateRoute>
         }
       />

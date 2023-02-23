@@ -118,7 +118,7 @@ const CheckoutShippingForm = () => {
           isClosable: false,
         });
         dispatch({ type: getLoadertotheCart });
-        // navigate("/");
+        navigate("/payment-success");
       }
     } catch (error) {
       setLoading(false);
@@ -244,11 +244,7 @@ const CheckoutShippingForm = () => {
           >
             <CheckoutFormCancelButton onClick={() => navigate("/")} />
 
-            <Button
-              colorScheme="purple"
-              variant="outline"
-              onClick={onOpen}
-            >
+            <Button colorScheme="purple" variant="outline" onClick={onOpen}>
               Save And Payment
             </Button>
           </Box>
