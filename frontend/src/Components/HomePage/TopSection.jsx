@@ -4,6 +4,12 @@ import styles from "./TopSection.module.css";
 import { Link } from "react-router-dom";
 
 const TopSection = () => {
+  let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
+  let token = tokenData.token;
+  let firstName = tokenData.firstName || null;
+  let lastName = tokenData.lastName || null;
+  let name = firstName + " " + lastName;
+
   return (
     <>
       <Box
@@ -57,12 +63,27 @@ const TopSection = () => {
               </Text>
             </Box>
             <Box width={"100%"} display={"flex"} gap={5}>
-              <Link to="/sign-up">
-                <button className={styles.button}>Sign Up</button>
-              </Link>
-              <Link to="/login">
-                <button className={styles.button}>Sign In</button>
-              </Link>
+              {token ? (
+                <>
+                  <Text
+                    color={"black"}
+                    fontSize={{ base: "5xl", md: "7xl" }}
+                    fontWeight={"bold"}
+                    marginTop={{ base: -6, md: -5 }}
+                  >
+                    {name}
+                  </Text>
+                </>
+              ) : (
+                <>
+                  <Link to="/sign-up">
+                    <button className={styles.button}>Sign Up</button>
+                  </Link>
+                  <Link to="/login">
+                    <button className={styles.button}>Sign In</button>
+                  </Link>
+                </>
+              )}
             </Box>
           </Box>
           <Box display={"flex"} justifyContent={"center"} alignItems={"center"}>

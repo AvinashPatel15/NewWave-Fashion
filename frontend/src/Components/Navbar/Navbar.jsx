@@ -195,7 +195,11 @@ const Navbar = () => {
                   <>
                     <MenuItem>{name}</MenuItem>
                     <MenuItem>{email}</MenuItem>
-                    <MenuItem icon={<BsBagCheck size={20} />}>Orders</MenuItem>
+                    <Link to={"/orders"}>
+                      <MenuItem icon={<BsBagCheck size={20} />}>
+                        Orders
+                      </MenuItem>
+                    </Link>
                   </>
                 )}
                 <Link to={"/wishlist"}>

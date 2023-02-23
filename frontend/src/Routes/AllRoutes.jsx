@@ -10,6 +10,7 @@ import Cart from "../Pages/Cart/Cart";
 import Error404main from "../Components/404-Error/Error404main";
 import PrivateRoute from "./PrivateRoute";
 import Wishlist from "../Pages/Wishlist/Wishlist";
+import Orders from "../Pages/Orders/Orders";
 
 const AllRoutes = () => {
   return (
@@ -33,6 +34,14 @@ const AllRoutes = () => {
         element={
           <PrivateRoute>
             <Wishlist />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/orders"
+        element={
+          <PrivateRoute>
+            <Orders />
           </PrivateRoute>
         }
       />
