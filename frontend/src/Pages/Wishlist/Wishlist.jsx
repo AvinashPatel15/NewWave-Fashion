@@ -18,8 +18,6 @@ const Wishlist = () => {
     dispatch(getWishlistData());
   }, []);
 
-  console.log(wishlists);
-
   return (
     <>
       <Navbar />

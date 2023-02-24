@@ -409,42 +409,42 @@ const NAV_ITEMS = [
   {
     label: "Men",
     href: "/products",
-    children: [
-      {
-        label: "Western Wear",
-        href: "#",
-      },
-      {
-        label: "Footwear",
-        href: "#",
-      },
-      {
-        label: "Accessories",
-        href: "#",
-      },
-    ],
+    // children: [
+    //   {
+    //     label: "Western Wear",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Footwear",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Accessories",
+    //     href: "#",
+    //   },
+    // ],
   },
   {
     label: "Women",
     href: "/products",
-    children: [
-      {
-        label: "Western Wear",
-        href: "#",
-      },
-      {
-        label: "Ethnic Wear",
-        href: "#",
-      },
-      {
-        label: "Footwear",
-        href: "#",
-      },
-      {
-        label: "Accessories",
-        href: "#",
-      },
-    ],
+    // children: [
+    //   {
+    //     label: "Western Wear",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Ethnic Wear",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Footwear",
+    //     href: "#",
+    //   },
+    //   {
+    //     label: "Accessories",
+    //     href: "#",
+    //   },
+    // ],
   },
   // {
   //   label: "Girls",

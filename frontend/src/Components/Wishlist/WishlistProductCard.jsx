@@ -1,21 +1,18 @@
-import { Box, Button, Image, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Image, Text } from "@chakra-ui/react";
 import React from "react";
 import { MdDeleteForever } from "react-icons/md";
-import { BsCartPlusFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import {
   deleteWishlistItem,
   getWishlistData,
 } from "../../Redux/Wishlist/Wishlist.action";
 import { useDispatch } from "react-redux";
-import { getLoadertotheCart } from "../../Redux/Cart/Cart.actionTypes";
 
 const WishlistProductCard = ({ productID, _id }) => {
   let discountPrice = (productID.price * productID.discount) / 100;
   let finalPrice = Math.round(productID.price - discountPrice);
 
   const dispatch = useDispatch();
-  const toast = useToast();
 
   const handleDeleteItem = async (id) => {
     await dispatch(deleteWishlistItem(id));

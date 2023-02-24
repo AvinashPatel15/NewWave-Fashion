@@ -12,7 +12,6 @@ const initialState = {
   isSuccess: false,
   isError: false,
   isLoading: false,
-  loader: false,
 };
 
 export const wishlistReducer = (state = initialState, { type, payload }) => {

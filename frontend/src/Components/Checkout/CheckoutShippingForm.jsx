@@ -133,9 +133,9 @@ const CheckoutShippingForm = () => {
   };
   return (
     <>
-      <Box display={"flex"} flexDirection={"column"} gap={5}>
-        <form>
-          <Box display={"flex"} gap={5}>
+      <Box display={"flex"} flexDirection={"column"} gap={10}>
+        <form style={{ display: "flex", flexDirection: "column", gap: "20px" }}>
+          <Box display={"flex"} gap={{ base: 5, md: 10 }}>
             <FormControl isRequired>
               <FormLabel>First Name</FormLabel>
               <Input
@@ -161,7 +161,7 @@ const CheckoutShippingForm = () => {
             </FormControl>
           </Box>
 
-          <Box display={"flex"} gap={5}>
+          <Box display={"flex"} gap={{ base: 5, md: 10 }}>
             <FormControl isRequired>
               <FormLabel>Phone Number</FormLabel>
               <Input
@@ -187,7 +187,7 @@ const CheckoutShippingForm = () => {
             </FormControl>
           </Box>
 
-          <Box display={"flex"} gap={5}>
+          <Box display={"flex"} gap={{ base: 5, md: 10 }}>
             <FormControl isRequired>
               <FormLabel>Pincode</FormLabel>
               <Input
@@ -211,7 +211,7 @@ const CheckoutShippingForm = () => {
             </FormControl>
           </Box>
 
-          <Box display={"flex"} gap={5}>
+          <Box display={"flex"} gap={{ base: 5, md: 10 }}>
             <FormControl isRequired>
               <FormLabel>State</FormLabel>
               <Input
