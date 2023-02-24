@@ -12,7 +12,6 @@ import {
 import React, { useEffect, useState } from "react";
 import Footer from "../../Components/Footer/Footer";
 import Navbar from "../../Components/Navbar/Navbar";
-import AllFilters from "../../Components/Products/AllFilters";
 import ProductCard from "../../Components/Products/ProductCard";
 import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
@@ -20,6 +19,8 @@ import Loader from "../../Components/Loader/Loader";
 const Products = () => {
   const [Products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
+  let [loader, setLoader] = useState(false);
+  let [ref, setRef] = useState(false);
 
   const getData = async () => {
     setLoading(true);
@@ -36,7 +37,25 @@ const Products = () => {
 
   useEffect(() => {
     getData();
-  }, []);
+  }, [ref]);
+
+  const sortByPrice = (query) => {
+    if (query === "asc") {
+      Products.sort((a, b) => {
+        return a.price - b.price;
+      });
+      setProducts(Products);
+      setLoader(!loader);
+    } else if (query === "desc") {
+      Products.sort((a, b) => {
+        return b.price - a.price;
+      });
+      setProducts(Products);
+      setLoader(!loader);
+    } else {
+      setRef(!ref);
+    }
+  };
 
   return (
     <>
@@ -67,8 +86,54 @@ const Products = () => {
             alignItems={"center"}
           >
             <Box>
-              <AllFilters />
+              <Menu>
+                <MenuButton>
+                  <Button
+                    rightIcon={<ChevronDownIcon />}
+                    width={"100%"}
+                    colorScheme="black"
+                    variant="outline"
+                    fontSize={"20px"}
+                    fontWeight={500}
+                  >
+                    Categories
+                  </Button>
+                </MenuButton>
+                <MenuList>
+                  <MenuItem fontWeight={600}>Default</MenuItem>
+                  <MenuItem>Western Wear</MenuItem>
+                  <MenuItem>Footwear</MenuItem>
+                  <MenuItem>Accessories</MenuItem>
+                </MenuList>
+              </Menu>
             </Box>
+
+            <Box display={{ base: "none", md: "flex" }}>
+              {/* <AllFilters /> */}
+              <Menu>
+                <MenuButton>
+                  <Button
+                    rightIcon={<ChevronDownIcon />}
+                    width={"100%"}
+                    colorScheme="black"
+                    variant="outline"
+                    fontSize={"20px"}
+                    fontWeight={500}
+                  >
+                    Sort By Discount
+                  </Button>
+                </MenuButton>
+                <MenuList>
+                  <MenuItem fontWeight={600}>Default</MenuItem>
+                  <MenuItem>10% Or Above</MenuItem>
+                  <MenuItem>20% Or Above</MenuItem>
+                  <MenuItem>30% Or Above</MenuItem>
+                  <MenuItem>40% Or Above</MenuItem>
+                  <MenuItem>50% Or Above</MenuItem>
+                </MenuList>
+              </Menu>
+            </Box>
+
             <Box>
               <Menu>
                 <MenuButton>
@@ -78,14 +143,34 @@ const Products = () => {
                     colorScheme="black"
                     variant="outline"
                     fontSize={"20px"}
-                    fontWeight={700}
+                    fontWeight={500}
                   >
-                    Sort By
+                    Sort By Price
                   </Button>
                 </MenuButton>
                 <MenuList>
-                  <MenuItem>Price: Low To High</MenuItem>
-                  <MenuItem>Price: High To Low</MenuItem>
+                  <MenuItem
+                    fontWeight={600}
+                    onClick={() => {
+                      sortByPrice();
+                    }}
+                  >
+                    Default
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      sortByPrice("asc");
+                    }}
+                  >
+                    Price: Low To High
+                  </MenuItem>
+                  <MenuItem
+                    onClick={() => {
+                      sortByPrice("desc");
+                    }}
+                  >
+                    Price: High To Low
+                  </MenuItem>
                 </MenuList>
               </Menu>
             </Box>
