@@ -21,7 +21,8 @@ import ProductCard from "../../Components/Products/ProductCard";
 import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
 import { Link, useParams } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { CLEAR_SEARCH_PRODUCT_DATA } from "../../Redux/Products/Products.actionTypes";
 
 const Products = () => {
   const [Products, setProducts] = useState([]);
@@ -29,15 +30,25 @@ const Products = () => {
   const [loader, setLoader] = useState(false);
   const [ref, setRef] = useState(false);
   const [search, setSearch] = useState("");
-  const { gender="" } = useParams();
-  const {isSearchProduct} = useSelector((state) => state.productReducerData)
+  const { gender } = useParams();
+  const { isSearchProduct } = useSelector((state) => state.productReducerData);
 
-  const getData = async (gender, search = "") => {
+  const dispatch = useDispatch();
+
+  const getData = async (gender, search) => {
     setLoading(true);
     try {
-      let res = await axios.get(
-        `${process.env.REACT_APP_BACKEND_URL}/products?q=${search}&gender=${gender}`
-      );
+      let res;
+      if (search) {
+        res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/products?q=${search}`
+        );
+      } else if (gender) {
+        dispatch({ type: CLEAR_SEARCH_PRODUCT_DATA });
+        res = await axios.get(
+          `${process.env.REACT_APP_BACKEND_URL}/products?gender=${gender}`
+        );
+      }
       setProducts(res.data);
       setLoading(false);
     } catch (error) {
@@ -48,7 +59,7 @@ const Products = () => {
   useEffect(() => {
     getData(gender, isSearchProduct);
     window.scrollTo(0, 0);
-  }, [ref, gender, isSearchProduct]);
+  }, [ref, gender, isSearchProduct, search]);
 
   const sortByPrice = (query) => {
     if (query === "asc") {
@@ -88,7 +99,7 @@ const Products = () => {
 
   return (
     <>
-      <Navbar/>
+      <Navbar />
       <Box width={{ base: "95%", lg: "90%" }} margin="auto">
         <Breadcrumb
           marginTop={3}
@@ -271,7 +282,9 @@ const Products = () => {
                       width={"350px"}
                       height={"350px"}
                     />
-                    <Text fontSize={20} fontWeight={500}>No Data Found!</Text>
+                    <Text fontSize={20} fontWeight={500}>
+                      No Data Found!
+                    </Text>
                   </Box>
                 </Box>
               ) : (

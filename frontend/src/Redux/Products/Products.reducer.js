@@ -55,6 +55,7 @@ export const productReducer = (state = initialState, { type, payload }) => {
         ...state,
         isLoading: false,
         isSearchProduct: null,
+        products: null,
       };
     }
 

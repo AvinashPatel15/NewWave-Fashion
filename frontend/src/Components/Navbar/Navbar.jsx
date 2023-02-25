@@ -38,7 +38,7 @@ import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 import { BsBagCheck } from "react-icons/bs";
-import { SEARCH_PRODUCT_DATA } from "../../Redux/Products/Products.actionTypes";
+import { CLEAR_SEARCH_PRODUCT_DATA, SEARCH_PRODUCT_DATA } from "../../Redux/Products/Products.actionTypes";
 
 const Navbar = () => {
   const { carts, loader } = useSelector((store) => store.cartReducerData);
@@ -59,6 +59,11 @@ const Navbar = () => {
     window.location.reload(false);
     setRefresh(!refresh);
   };
+
+  const handleSearchProduct = () => {
+    dispatch({type:CLEAR_SEARCH_PRODUCT_DATA})
+    dispatch({ type: SEARCH_PRODUCT_DATA, payload: text });
+  }
 
   useEffect(() => {
     dispatch(getCartData());
@@ -148,7 +153,7 @@ const Navbar = () => {
                 <Link to={`/products/${text}`}>
                   <Button
                     onClick={() => {
-                      dispatch({ type: SEARCH_PRODUCT_DATA, payload: text });
+                      handleSearchProduct()
                     }}
                     h="1.75rem"
                     size={{ base: "sm", md: "md" }}
