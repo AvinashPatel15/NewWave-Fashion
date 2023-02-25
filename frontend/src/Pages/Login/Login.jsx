@@ -125,76 +125,78 @@ const Login = () => {
             right={{ base: 0, lg: 300 }}
           >
             <Stack spacing={4}>
-              <FormControl id="email">
-                <FormLabel>Email address</FormLabel>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Enter Your Email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                />
-              </FormControl>
-              <FormControl id="password">
-                <FormLabel>Password</FormLabel>
-                <InputGroup>
+              <form action="">
+                <FormControl id="email">
+                  <FormLabel>Email address</FormLabel>
                   <Input
-                    type={showPassword ? "text" : "password"}
-                    name="password"
-                    placeholder="Enter 8 Digit Password"
-                    value={formData.password}
+                    type="email"
+                    name="email"
+                    placeholder="Enter Your Email"
+                    value={formData.email}
                     onChange={handleChange}
                     required
                   />
-                  <InputRightElement h={"full"}>
+                </FormControl>
+                <FormControl id="password">
+                  <FormLabel>Password</FormLabel>
+                  <InputGroup>
+                    <Input
+                      type={showPassword ? "text" : "password"}
+                      name="password"
+                      placeholder="Enter 8 Digit Password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      required
+                    />
+                    <InputRightElement h={"full"}>
+                      <Button
+                        variant={"ghost"}
+                        onClick={() =>
+                          setShowPassword((showPassword) => !showPassword)
+                        }
+                      >
+                        {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
+                </FormControl>
+                <Stack spacing={10}>
+                  <Stack
+                    direction={{ base: "column", sm: "row" }}
+                    align={"start"}
+                    justify={"space-between"}
+                  >
+                    <Checkbox>Remember me</Checkbox>
+                    <Text cursor={"pointer"} color={"blue.400"}>
+                      Forgot password?
+                    </Text>
+                  </Stack>
+                  {loading ? (
                     <Button
-                      variant={"ghost"}
-                      onClick={() =>
-                        setShowPassword((showPassword) => !showPassword)
-                      }
+                      isLoading
+                      loadingText="Submitting"
+                      bg={"blue.400"}
+                      color={"white"}
+                      _hover={{
+                        bg: "blue.500",
+                      }}
                     >
-                      {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                      Sign in
                     </Button>
-                  </InputRightElement>
-                </InputGroup>
-              </FormControl>
-              <Stack spacing={10}>
-                <Stack
-                  direction={{ base: "column", sm: "row" }}
-                  align={"start"}
-                  justify={"space-between"}
-                >
-                  <Checkbox>Remember me</Checkbox>
-                  <Text cursor={"pointer"} color={"blue.400"}>
-                    Forgot password?
-                  </Text>
+                  ) : (
+                    <Button
+                      onClick={handleSubmit}
+                      bg={"blue.400"}
+                      color={"white"}
+                      _hover={{
+                        bg: "blue.500",
+                      }}
+                    >
+                      Sign in
+                    </Button>
+                  )}
                 </Stack>
-                {loading ? (
-                  <Button
-                    isLoading
-                    loadingText="Submitting"
-                    bg={"blue.400"}
-                    color={"white"}
-                    _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
-                    Sign in
-                  </Button>
-                ) : (
-                  <Button
-                    onClick={handleSubmit}
-                    bg={"blue.400"}
-                    color={"white"}
-                    _hover={{
-                      bg: "blue.500",
-                    }}
-                  >
-                    Sign in
-                  </Button>
-                )}
-              </Stack>
+              </form>
             </Stack>
             <Stack pt={3} display={"flex"}>
               <Text

@@ -1,9 +1,13 @@
-import { ChevronDownIcon } from "@chakra-ui/icons";
+import { ChevronDownIcon, ChevronRightIcon } from "@chakra-ui/icons";
 import {
   Box,
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
   Button,
   Grid,
   Heading,
+  Image,
   Menu,
   MenuButton,
   MenuItem,
@@ -16,7 +20,7 @@ import Navbar from "../../Components/Navbar/Navbar";
 import ProductCard from "../../Components/Products/ProductCard";
 import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 const Products = () => {
   const [Products, setProducts] = useState([]);
@@ -84,6 +88,27 @@ const Products = () => {
     <>
       <Navbar />
       <Box width={{ base: "95%", lg: "90%" }} margin="auto">
+        <Breadcrumb
+          marginTop={3}
+          spacing="8px"
+          separator={<ChevronRightIcon color="gray.500" />}
+        >
+          <BreadcrumbItem>
+            <Link to={"/"}>
+              <BreadcrumbLink>Home</BreadcrumbLink>
+            </Link>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem>
+            <BreadcrumbLink href="#">Products</BreadcrumbLink>
+          </BreadcrumbItem>
+
+          <BreadcrumbItem isCurrentPage>
+            <BreadcrumbLink textTransform={"capitalize"}>
+              {gender}
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+        </Breadcrumb>
         <Box
           width={"100%"}
           marginTop={{ base: 3, md: 5 }}
@@ -91,8 +116,8 @@ const Products = () => {
           justifyContent={"left"}
           alignItems={"center"}
         >
-          <Heading as={"h3"} size={"xl"}>
-            {gender}
+          <Heading as={"h3"} size={"xl"} textTransform={"capitalize"}>
+            {gender} Products
           </Heading>
         </Box>
         <Box
@@ -231,7 +256,22 @@ const Products = () => {
           ) : (
             <>
               {Products.length === 0 ? (
-                <Text>No Data Found</Text>
+                <Box width={"100%"} height={"60vh"} margin={"auto"} mt={"50px"}>
+                  <Box
+                    display={"flex"}
+                    flexDirection={"column"}
+                    margin={"auto"}
+                    justifyContent={"center"}
+                    alignItems={"center"}
+                  >
+                    <Image
+                      src="https://img.freepik.com/free-vector/no-data-concept-illustration_114360-536.jpg?w=740&t=st=1677330897~exp=1677331497~hmac=e032e484a1ea2fbeb4a4e1c550a7e9459bfa5b3331cc39b56b2a2a2b3142851c"
+                      width={"350px"}
+                      height={"350px"}
+                    />
+                    <Text fontSize={20} fontWeight={500}>No Data Found!</Text>
+                  </Box>
+                </Box>
               ) : (
                 <Grid
                   marginTop={{ base: 5, md: 10 }}
