@@ -38,11 +38,14 @@ import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 import { BsBagCheck } from "react-icons/bs";
+import { SEARCH_PRODUCT_DATA } from "../../Redux/Products/Products.actionTypes";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { carts, loader } = useSelector((store) => store.cartReducerData);
   const { isOpen, onToggle } = useDisclosure();
   const [refresh, setRefresh] = useState(true);
+  const [text, setText] = useState("");
+
   const dispatch = useDispatch();
 
   let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
@@ -139,11 +142,20 @@ const Navbar = (props) => {
                 variant="unstyled"
                 width={{ base: 160, md: 250 }}
                 placeholder="Search"
+                onChange={(e) => setText(e.target.value)}
               />
               <InputRightElement width={{ base: "4.rem", md: "4.rem" }}>
-                <Button h="1.75rem" size={{ base: "sm", md: "md" }}>
-                  <GoSearch />
-                </Button>
+                <Link to={`/products/${text}`}>
+                  <Button
+                    onClick={() => {
+                      dispatch({ type: SEARCH_PRODUCT_DATA, payload: text });
+                    }}
+                    h="1.75rem"
+                    size={{ base: "sm", md: "md" }}
+                  >
+                    <GoSearch />
+                  </Button>
+                </Link>
               </InputRightElement>
             </InputGroup>
 

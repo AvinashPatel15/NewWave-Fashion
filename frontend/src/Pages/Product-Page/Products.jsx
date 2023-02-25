@@ -21,6 +21,7 @@ import ProductCard from "../../Components/Products/ProductCard";
 import axios from "axios";
 import Loader from "../../Components/Loader/Loader";
 import { Link, useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const Products = () => {
   const [Products, setProducts] = useState([]);
@@ -28,7 +29,8 @@ const Products = () => {
   const [loader, setLoader] = useState(false);
   const [ref, setRef] = useState(false);
   const [search, setSearch] = useState("");
-  const { gender } = useParams();
+  const { gender="" } = useParams();
+  const {isSearchProduct} = useSelector((state) => state.productReducerData)
 
   const getData = async (gender, search = "") => {
     setLoading(true);
@@ -44,9 +46,9 @@ const Products = () => {
   };
 
   useEffect(() => {
-    getData(gender, search);
+    getData(gender, isSearchProduct);
     window.scrollTo(0, 0);
-  }, [ref, gender, search]);
+  }, [ref, gender, isSearchProduct]);
 
   const sortByPrice = (query) => {
     if (query === "asc") {
@@ -86,7 +88,7 @@ const Products = () => {
 
   return (
     <>
-      <Navbar />
+      <Navbar/>
       <Box width={{ base: "95%", lg: "90%" }} margin="auto">
         <Breadcrumb
           marginTop={3}
