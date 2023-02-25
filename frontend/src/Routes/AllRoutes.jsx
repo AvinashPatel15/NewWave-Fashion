@@ -21,7 +21,7 @@ const AllRoutes = () => {
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
       <Route path="/sign-up" element={<Register />} />
       <Route path="/login" element={<Login />} />
-      <Route path="/products" element={<Products />} />
+      <Route path="/products/:gender" element={<Products />} />
       <Route path="/detail-Page/:id" element={<DetailPage />} />
 
       <Route

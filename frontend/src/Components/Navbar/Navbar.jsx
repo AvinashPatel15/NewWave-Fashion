@@ -39,7 +39,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 import { BsBagCheck } from "react-icons/bs";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const { carts, loader } = useSelector((store) => store.cartReducerData);
   const { isOpen, onToggle } = useDisclosure();
   const [refresh, setRefresh] = useState(true);
@@ -408,7 +408,7 @@ const MobileNavItem = ({ label, children, href }) => {
 const NAV_ITEMS = [
   {
     label: "Men",
-    href: "/products",
+    href: "/products/men",
     // children: [
     //   {
     //     label: "Western Wear",
@@ -426,7 +426,7 @@ const NAV_ITEMS = [
   },
   {
     label: "Women",
-    href: "/products",
+    href: "/products/women",
     // children: [
     //   {
     //     label: "Western Wear",
