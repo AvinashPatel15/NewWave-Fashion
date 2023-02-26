@@ -13,15 +13,21 @@ import Wishlist from "../Pages/Wishlist/Wishlist";
 import Orders from "../Pages/Orders/Orders";
 import Checkout from "../Pages/Checkout-Page/Checkout";
 import PaymentSuccess from "../Pages/Payment-Success/PaymentSuccess";
+import Admin from "../Pages/Admin/Admin";
 
 const AllRoutes = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+
       <Route path="/users/:id/verify/:token" element={<EmailVerify />} />
+
       <Route path="/sign-up" element={<Register />} />
+
       <Route path="/login" element={<Login />} />
+
       <Route path="/products/:gender" element={<Products />} />
+
       <Route path="/detail-Page/:id" element={<DetailPage />} />
 
       <Route
@@ -68,6 +74,16 @@ const AllRoutes = () => {
           </PrivateRoute>
         }
       />
+
+      <Route
+        path="/admin"
+        element={
+          <PrivateRoute>
+            <Admin />
+          </PrivateRoute>
+        }
+      />
+
       <Route path="*" element={<Error404main />} />
     </Routes>
   );

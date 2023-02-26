@@ -30,6 +30,7 @@ const Login = () => {
   const [formData, setFormData] = useState(initState);
   const toast = useToast();
   const navigate = useNavigate();
+  const Navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -76,10 +77,16 @@ const Login = () => {
             firstName: resData.first_name,
             lastName: resData.last_name,
             email: resData.email,
-            admin: resData.admin,
+            admin: resData.isAdmin,
           })
         );
-        navigate("/");
+        // navigate("/");
+        let tokenData = JSON.parse(localStorage.getItem("newwave")) || false;
+        if (tokenData.admin) {
+          navigate("/admin");
+        } else {
+          navigate("/");
+        }
       }
     } catch (error) {
       setLoading(false);

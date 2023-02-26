@@ -38,7 +38,11 @@ import Logout from "./Logout";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 import { BsBagCheck } from "react-icons/bs";
-import { CLEAR_SEARCH_PRODUCT_DATA, SEARCH_PRODUCT_DATA } from "../../Redux/Products/Products.actionTypes";
+import { GrUserAdmin } from "react-icons/gr";
+import {
+  CLEAR_SEARCH_PRODUCT_DATA,
+  SEARCH_PRODUCT_DATA,
+} from "../../Redux/Products/Products.actionTypes";
 
 const Navbar = () => {
   const { carts, loader } = useSelector((store) => store.cartReducerData);
@@ -53,6 +57,7 @@ const Navbar = () => {
   let lastName = tokenData.lastName || null;
   let name = firstName + " " + lastName;
   let email = tokenData.email || null;
+  let admin = tokenData.admin || null;
 
   const logout = () => {
     localStorage.clear("localmart");
@@ -61,9 +66,9 @@ const Navbar = () => {
   };
 
   const handleSearchProduct = () => {
-    dispatch({type:CLEAR_SEARCH_PRODUCT_DATA})
+    dispatch({ type: CLEAR_SEARCH_PRODUCT_DATA });
     dispatch({ type: SEARCH_PRODUCT_DATA, payload: text });
-  }
+  };
 
   useEffect(() => {
     dispatch(getCartData());
@@ -153,7 +158,7 @@ const Navbar = () => {
                 <Link to={`/products/${text}`}>
                   <Button
                     onClick={() => {
-                      handleSearchProduct()
+                      handleSearchProduct();
                     }}
                     h="1.75rem"
                     size={{ base: "sm", md: "md" }}
@@ -212,6 +217,15 @@ const Navbar = () => {
                   <>
                     <MenuItem>{name}</MenuItem>
                     <MenuItem>{email}</MenuItem>
+                    {admin && (
+                      <>
+                        <Link to={"/admin"}>
+                          <MenuItem icon={<GrUserAdmin size={20} />}>
+                            Admin
+                          </MenuItem>
+                        </Link>
+                      </>
+                    )}
                     <Link to={"/orders"}>
                       <MenuItem icon={<BsBagCheck size={20} />}>
                         Orders
