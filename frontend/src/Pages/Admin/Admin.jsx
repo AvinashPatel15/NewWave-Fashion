@@ -27,6 +27,7 @@ import { Link, useNavigate } from "react-router-dom";
 import nwlogo2 from "../../Assets/nwlogo2.png";
 import Logout from "../../Components/Navbar/Logout";
 import AdminDashboard from "./AdminDashboard";
+import AllOrders from "./AllOrders";
 
 const Admin = () => {
   const [refresh, setRefresh] = useState(true);
@@ -52,7 +53,7 @@ const Admin = () => {
   }, []);
 
   return (
-    <Box width={"100%"} height={"100vh"}>
+    <Box width={"100%"}>
       <Box
         width={"100%"}
         display={"flex"}
@@ -131,17 +132,16 @@ const Admin = () => {
         width={"100%"}
         margin={"auto"}
         display={{ base: "none", md: "flex" }}
-        paddingY={3}
         isFitted
         variant="soft-rounded"
         mb={5}
       >
-        <Box width={"100%"} gap={5}>
+        <Box width={"100%"} margin={"auto"}>
           <TabList
             position={"sticky"}
             top={20}
             borderBottom={"2px solid black"}
-            paddingY={3}
+            paddingY={2}
             background={"transparent"}
             backdropFilter={"blur(10px)"}
           >
@@ -155,7 +155,9 @@ const Admin = () => {
             <TabPanel>
               <AdminDashboard />
             </TabPanel>
-            <TabPanel>Orders</TabPanel>
+            <TabPanel>
+              <AllOrders />
+            </TabPanel>
             <TabPanel>Users</TabPanel>
             <TabPanel>Products</TabPanel>
           </TabPanels>
@@ -209,7 +211,9 @@ const Admin = () => {
             <TabPanel>
               <AdminDashboard />
             </TabPanel>
-            <TabPanel>Orders</TabPanel>
+            <TabPanel>
+              <AllOrders />
+            </TabPanel>
             <TabPanel>Users</TabPanel>
             <TabPanel>Products</TabPanel>
           </TabPanels>

@@ -1,6 +1,5 @@
 import { Accordion, Box, Image, Text } from "@chakra-ui/react";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import DeleteCartItemButton from "../../Components/Cart/DeleteCartItemButton";
@@ -17,8 +16,6 @@ const Orders = () => {
   useEffect(() => {
     dispatch(getOrdersData());
   }, []);
-
-  console.log(orders);
   return (
     <>
       <Navbar />

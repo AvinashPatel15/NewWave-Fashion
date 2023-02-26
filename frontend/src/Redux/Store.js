@@ -5,6 +5,7 @@ import {
   compose,
 } from "redux";
 import thunk from "redux-thunk";
+import { allOrdersReducer } from "./Admin/AllOrders/AllOrder.reducer";
 import { cartReducer } from "./Cart/Cart.reducer";
 import { orderReducer } from "./Orders/Orders.reducer";
 import { productReducer } from "./Products/Products.reducer";
@@ -15,6 +16,7 @@ const globalReducer = combineReducers({
   wishlistReducerData: wishlistReducer,
   ordersReducerData: orderReducer,
   productReducerData: productReducer,
+  allOrdersReducerData: allOrdersReducer,
 });
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;

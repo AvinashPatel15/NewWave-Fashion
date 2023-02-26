@@ -9,7 +9,7 @@ import OrderChart from "./OrderChart";
 const AdminDashboard = () => {
   return (
     <>
-      <Box>
+      <Box padding={5}>
         <Box
           width={"100%"}
           margin={"auto"}
