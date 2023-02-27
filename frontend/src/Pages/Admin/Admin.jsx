@@ -25,9 +25,9 @@ import {
 } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import nwlogo2 from "../../Assets/nwlogo2.png";
+import AdminDashboard from "../../Components/Admin/AdminDashboard";
+import AllOrders from "../../Components/Admin/AllOrders";
 import Logout from "../../Components/Navbar/Logout";
-import AdminDashboard from "./AdminDashboard";
-import AllOrders from "./AllOrders";
 
 const Admin = () => {
   const [refresh, setRefresh] = useState(true);

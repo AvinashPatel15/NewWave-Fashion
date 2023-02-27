@@ -14,6 +14,7 @@ import Orders from "../Pages/Orders/Orders";
 import Checkout from "../Pages/Checkout-Page/Checkout";
 import PaymentSuccess from "../Pages/Payment-Success/PaymentSuccess";
 import Admin from "../Pages/Admin/Admin";
+import AdminDashboard from "../Components/Admin/AdminDashboard";
 
 const AllRoutes = () => {
   return (

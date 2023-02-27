@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import React from "react";
 import { AiFillShopping } from "react-icons/ai";
 import { FaUserFriends } from "react-icons/fa";
@@ -142,6 +142,22 @@ const AdminDashboard = () => {
               </Box>
             </Box>
 
+            <Box
+              width={"100%"}
+              margin={"auto"}
+              justifyContent={"center"}
+              alignContent={"center"}
+              mb={4}
+            >
+              <Text
+                fontSize={30}
+                color={"black"}
+                fontWeight={600}
+                textAlign={"center"}
+              >
+                Orders Chart
+              </Text>
+            </Box>
             <Box>
               <OrderChart />
             </Box>

@@ -289,6 +289,8 @@ const Products = () => {
                 </Box>
               ) : (
                 <Grid
+                  width={"100%"}
+                  margin={"auto"}
                   marginTop={{ base: 5, md: 10 }}
                   gridTemplateColumns={{
                     base: "repeat(1,1fr)",

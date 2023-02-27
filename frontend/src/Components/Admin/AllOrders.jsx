@@ -32,6 +32,8 @@ const AllOrders = () => {
     dispatch(getAllOrdersData());
   }, []);
 
+  // console.log(allorders[allorders.length - 1]);
+
   return (
     <>
       <Box padding={5}>

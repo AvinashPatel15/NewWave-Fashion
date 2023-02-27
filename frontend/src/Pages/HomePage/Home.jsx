@@ -14,7 +14,6 @@ import Section6 from "../../Components/HomePage/Section6";
 import Section7 from "../../Components/HomePage/Section7";
 import Section8 from "../../Components/HomePage/Section8";
 import Section9 from "../../Components/HomePage/Section9";
-import TopSection from "../../Components/HomePage/TopSection";
 import { useDispatch, useSelector } from "react-redux";
 import { getCartData } from "../../Redux/Cart/Cart.actions";
 
@@ -28,10 +27,6 @@ const Home = () => {
     <>
       {/* Navbar */}
       <Navbar />
-      {/* Top Section */}
-      <Box width={"100%"} marginTop={{ base: 3, md: 5 }}>
-        <TopSection />
-      </Box>
       {/* Section 1 Carousel 1 */}
       <Box width={"100%"} marginTop={{ base: 5, md: 10 }}>
         <Section1Carousel1 />

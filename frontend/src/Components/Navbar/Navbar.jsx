@@ -157,6 +157,7 @@ const Navbar = () => {
               <InputRightElement width={{ base: "4.rem", md: "4.rem" }}>
                 <Link to={`/products/${text}`}>
                   <Button
+                  
                     onClick={() => {
                       handleSearchProduct();
                     }}
