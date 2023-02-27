@@ -1,15 +1,12 @@
 const { PurchaseHistoryModel } = require("../../Models/PurchaseHistory.Model");
 
-const getPurchaseHistory = async (req, res) => {
-  const userID = req.userID;
+const getAllPurchaseHistory = async (req, res) => {
   try {
-    const ph = await PurchaseHistoryModel.find({ userID }).populate([
-      "productID",
-    ]);
+    const ph = await PurchaseHistoryModel.find().populate(["productID"]);
     if (ph.length > 0) {
       res.send(ph);
     } else {
-      res.send({ message: "You Have Not Purchase Yet" });
+      res.send({ message: "No One Have Ordered Yet!" });
     }
   } catch (error) {
     res
@@ -19,5 +16,5 @@ const getPurchaseHistory = async (req, res) => {
 };
 
 module.exports = {
-  getPurchaseHistory,
+  getAllPurchaseHistory,
 };

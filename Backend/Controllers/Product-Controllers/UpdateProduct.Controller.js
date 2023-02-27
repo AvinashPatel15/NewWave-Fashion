@@ -5,7 +5,7 @@ const updateProduct = async (req, res) => {
   const payload = req.body;
   try {
     await ProductModel.findByIdAndUpdate({ _id: ID }, payload);
-    res.send(`Update The Book Data Whose ID Is ${ID}`);
+    res.send(`Update The Product Data Whose ID Is ${ID}`);
   } catch (error) {
     console.log(error);
   }

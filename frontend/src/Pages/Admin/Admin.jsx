@@ -179,6 +179,7 @@ const Admin = () => {
           <Box
             position={"sticky"}
             top={20}
+            left={0}
             borderBottom={"2px solid black"}
             paddingY={3}
             background={"transparent"}

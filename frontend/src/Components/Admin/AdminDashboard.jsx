@@ -1,12 +1,63 @@
 import { Box, Text } from "@chakra-ui/react";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { AiFillShopping } from "react-icons/ai";
 import { FaUserFriends } from "react-icons/fa";
 import { GiProfit } from "react-icons/gi";
 import { MdProductionQuantityLimits } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllOrdersData } from "../../Redux/Admin/AllOrders/AllOrders.action";
 import OrderChart from "./OrderChart";
 
 const AdminDashboard = () => {
+  const { allorders, isLoading } = useSelector(
+    (store) => store.allOrdersReducerData
+  );
+  const dispatch = useDispatch();
+  const [users, setUsers] = useState([]);
+  const [products, setProducts] = useState([]);
+
+  const getProductsData = async () => {
+    let token = JSON.parse(localStorage.getItem("newwave")) || false;
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/products`, {
+        headers: {
+          authorization: token.token || false,
+        },
+      });
+      let data = await res.json();
+      setProducts(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getUsersData = async () => {
+    let token = JSON.parse(localStorage.getItem("newwave")) || false;
+    try {
+      let res = await fetch(`${process.env.REACT_APP_BACKEND_URL}/users`, {
+        headers: {
+          authorization: token.token || false,
+        },
+      });
+      let data = await res.json();
+      setUsers(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    dispatch(getAllOrdersData());
+    getProductsData();
+    getUsersData();
+  }, []);
+
+  let AllOrdersProfit = 0;
+
+  for (let i = 0; i < allorders.length; i++) {
+    AllOrdersProfit = AllOrdersProfit + allorders[i].productID.price;
+  }
+
   return (
     <>
       <Box padding={5}>
@@ -58,7 +109,7 @@ const AdminDashboard = () => {
                     Total Users
                   </Text>
                   <Text fontSize={20} fontWeight={500} color={"blackAlpha.700"}>
-                    44,778
+                    {parseFloat(users.length).toLocaleString()}
                   </Text>
                 </Box>
                 <Box>
@@ -83,7 +134,7 @@ const AdminDashboard = () => {
                     Total Profit
                   </Text>
                   <Text fontSize={20} fontWeight={500} color={"blackAlpha.700"}>
-                    44,778
+                    ₹ {parseFloat(AllOrdersProfit).toLocaleString()}.00
                   </Text>
                 </Box>
                 <Box>
@@ -108,7 +159,7 @@ const AdminDashboard = () => {
                     Total Orders
                   </Text>
                   <Text fontSize={20} fontWeight={500} color={"blackAlpha.700"}>
-                    44,778
+                    {parseFloat(allorders.length).toLocaleString()}
                   </Text>
                 </Box>
                 <Box>
@@ -133,7 +184,7 @@ const AdminDashboard = () => {
                     Total Products
                   </Text>
                   <Text fontSize={20} fontWeight={500} color={"blackAlpha.700"}>
-                    44,778
+                    {parseFloat(products.length).toLocaleString()}
                   </Text>
                 </Box>
                 <Box>

@@ -50,7 +50,6 @@ const registerUser = async (req, res) => {
             isVerified,
           });
 
-          /** Create Token To Verify Email */
           const token = await new TokenModel({
             userID: user._id,
             token: crypto.randomBytes(32).toString("hex"),

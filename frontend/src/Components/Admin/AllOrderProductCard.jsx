@@ -24,12 +24,66 @@ const AllOrderProductCard = ({
   createdAt,
   first_name,
   last_name,
+  _id,
 }) => {
   let discountPrice = (productID.price * productID.discount) / 100;
   let finalPrice = Math.round(productID.price - discountPrice);
+  let quntityPrice = finalPrice * productCOUNT;
   return (
     <>
       <AccordionItem>
+        <Box paddingX={4} paddingY={1} border={"1px solid black"} width={"350px"} marginY={5}>
+          <Box
+            display={"flex"}
+            justifyContent={"flex-start"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <Text fontSize={20} fontWeight={500}>
+              Order ID
+            </Text>
+            <Text fontSize={22} fontWeight={700} marginTop={-1}>
+              :
+            </Text>
+            <Text fontSize={16} fontWeight={400}>
+              {_id}
+            </Text>
+          </Box>
+
+          <Box
+            display={"flex"}
+            justifyContent={"flex-start"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <Text fontSize={20} fontWeight={500}>
+              User ID
+            </Text>
+            <Text fontSize={22} fontWeight={700} marginTop={-1}>
+              :
+            </Text>
+            <Text fontSize={16} fontWeight={400}>
+              {productID._id}
+            </Text>
+          </Box>
+
+          <Box
+            display={"flex"}
+            justifyContent={"flex-start"}
+            alignItems={"center"}
+            gap={2}
+          >
+            <Text fontSize={20} fontWeight={500}>
+              User Name
+            </Text>
+            <Text fontSize={22} fontWeight={700} marginTop={-1}>
+              :
+            </Text>
+            <Text fontSize={17} fontWeight={500}>
+              {first_name + " " + last_name}
+            </Text>
+          </Box>
+        </Box>
         <AccordionButton>
           <Box as="span" flex="1" textAlign="left">
             <Box
@@ -74,7 +128,7 @@ const AllOrderProductCard = ({
                   alignItems={"baseline"}
                 >
                   <Text fontSize={20} fontWeight={600} color={"blackAlpha.800"}>
-                    ₹ {finalPrice}.00
+                    ₹ {parseFloat(finalPrice).toLocaleString()}.00
                   </Text>
                   <Box
                     display={"flex"}
@@ -114,7 +168,7 @@ const AllOrderProductCard = ({
                 Quantity: {productCOUNT}
               </Text>
               <Text fontSize={17} fontWeight={600} color={"blackAlpha.800"}>
-                Subtotal: ₹{productCOUNT * finalPrice}
+                Subtotal: ₹ {parseFloat(quntityPrice).toLocaleString()}.00
               </Text>
             </Box>
 
