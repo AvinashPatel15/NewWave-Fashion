@@ -32,9 +32,6 @@ function OrderChart() {
     }
   };
 
-  let ProdData = Products.length > 0 && Products[Products.length - 1];
-  console.log(ProdData);
-
   useEffect(() => {
     getData();
   }, []);
