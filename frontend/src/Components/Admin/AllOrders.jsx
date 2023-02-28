@@ -14,7 +14,7 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -23,6 +23,8 @@ import Loader from "../../Components/Loader/Loader";
 import { getAllOrdersData } from "../../Redux/Admin/AllOrders/AllOrders.action";
 
 const AllOrders = () => {
+  const [flag, setFlag] = useState(false);
+
   const { allorders, isLoading } = useSelector(
     (store) => store.allOrdersReducerData
   );
@@ -30,9 +32,7 @@ const AllOrders = () => {
 
   useEffect(() => {
     dispatch(getAllOrdersData());
-  }, []);
-
-  // console.log(allorders[allorders.length - 1]);
+  }, [flag]);
 
   return (
     <>
@@ -158,7 +158,12 @@ const AllOrders = () => {
                     >
                       {allorders &&
                         allorders.map((el) => (
-                          <AllOrderProductCard key={el._id} {...el} />
+                          <AllOrderProductCard
+                            key={el._id}
+                            {...el}
+                            flag={flag}
+                            setFlag={setFlag}
+                          />
                         ))}
                     </Accordion>
                   </Box>

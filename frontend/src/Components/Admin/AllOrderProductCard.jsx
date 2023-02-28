@@ -7,8 +7,10 @@ import {
   Image,
   Text,
   Icon,
+  Select,
+  Button,
 } from "@chakra-ui/react";
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 const AllOrderProductCard = ({
@@ -25,14 +27,52 @@ const AllOrderProductCard = ({
   first_name,
   last_name,
   _id,
+  flag,
+  setFlag,
 }) => {
+  const [loading, setLoading] = useState(false);
+
   let discountPrice = (productID.price * productID.discount) / 100;
   let finalPrice = Math.round(productID.price - discountPrice);
   let quntityPrice = finalPrice * productCOUNT;
+
+  const handleUpdateOrderStatus = async (e, _id) => {
+    setLoading(true);
+    const input = {
+      orderStatus: e.target.value,
+    };
+    let token = JSON.parse(localStorage.getItem("newwave")) || false;
+    try {
+      let res = await fetch(
+        `${process.env.REACT_APP_BACKEND_URL}/purchasehistory/update/${_id}`,
+        {
+          method: "PATCH",
+          headers: {
+            authorization: token.token || false,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(input),
+        }
+      );
+      let result = await res.json();
+      console.log(result);
+      setFlag(!flag);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return (
     <>
       <AccordionItem>
-        <Box paddingX={4} paddingY={1} border={"1px solid black"} width={"350px"} marginY={5}>
+        <Box
+          paddingX={4}
+          paddingY={1}
+          border={"1px solid black"}
+          width={"350px"}
+          marginY={5}
+        >
           <Box
             display={"flex"}
             justifyContent={"flex-start"}
@@ -159,7 +199,16 @@ const AllOrderProductCard = ({
               </Box>
             </Box>
           </Box>
-          <AccordionIcon />
+          <Box
+            display={"flex"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
+          >
+            <Text fontWeight={500} display={{ base: "none", md: "flex" }}>
+              Details
+            </Text>
+            <AccordionIcon fontSize={35} />
+          </Box>
         </AccordionButton>
         <AccordionPanel>
           <Box>
@@ -222,6 +271,40 @@ const AllOrderProductCard = ({
             </Box>
           </Box>
         </AccordionPanel>
+        <Box paddingX={4} paddingY={1} marginY={5} width={"300px"}>
+          {orderStatus === "Processing" ? (
+            <>
+              {loading ? (
+                <Button
+                  isLoading
+                  loadingText="Shipping..."
+                  bg={"blue.400"}
+                  color={"white"}
+                  _hover={{
+                    bg: "blue.500",
+                  }}
+                >
+                  Processing
+                </Button>
+              ) : (
+                <Select onChange={(e) => handleUpdateOrderStatus(e, _id)}>
+                  <option value="">Choose Status</option>
+                  <option value="Shipped">Shipped</option>
+                </Select>
+              )}
+            </>
+          ) : orderStatus === "Shipped" ? (
+            <Select onChange={(e) => handleUpdateOrderStatus(e, _id)}>
+              <option value="">Choose Status</option>
+              <option value="Delivered">Delivered</option>
+            </Select>
+          ) : (
+            <Select disabled onChange={(e) => handleUpdateOrderStatus(e, _id)}>
+              <option value="">Choose Status</option>
+              <option value="Delivered">Delivered</option>
+            </Select>
+          )}
+        </Box>
       </AccordionItem>
     </>
   );

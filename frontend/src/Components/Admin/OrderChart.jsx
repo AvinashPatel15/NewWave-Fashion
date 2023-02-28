@@ -163,7 +163,6 @@ function OrderChart() {
             type="monotone"
             dataKey="Quantity"
             stroke="#82ca9d"
-            // activeDot={{ r: 8 }}
           />
         </LineChart>
       </ResponsiveContainer>

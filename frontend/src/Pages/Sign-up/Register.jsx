@@ -94,27 +94,6 @@ const Register = () => {
     }
   };
 
-  // const getPincodeData = async (e) => {
-  //   if (e.target.value.length === 6) {
-  //     const resp = await fetch(
-  //       `https://api.postalpincode.in/pincode/${e.target.value}`
-  //     );
-  //     const pinData = await resp.json();
-
-  //     if (pinData[0].Status === "Success") {
-  //       setFormData({
-  //         ...formData,
-  //         state: pinData[0].PostOffice[0].State,
-  //         city: pinData[0].PostOffice[0].District,
-  //         pincode: e.target.value,
-  //       });
-  //     } else if (pinData[0].Status !== "Success") {
-  //       alert("Enter Correct PinCode");
-  //       setFormData({ ...formData, state: "", city: "", pincode: "" });
-  //     }
-  //   }
-  // };
-
   return (
     <Box
       backgroundImage={signupbackground}
@@ -138,6 +117,7 @@ const Register = () => {
               />
             </Link>
           </Stack>
+
           <Box
             rounded={"lg"}
             bg={"rgba(255, 148, 24, 0.3)"}
@@ -163,6 +143,7 @@ const Register = () => {
                     />
                   </FormControl>
                 </Box>
+
                 <Box>
                   <FormControl id="lastName" isRequired>
                     <FormLabel>Last Name</FormLabel>
@@ -177,6 +158,7 @@ const Register = () => {
                   </FormControl>
                 </Box>
               </HStack>
+
               <HStack>
                 <Box>
                   <FormControl id="age" isRequired>
@@ -191,6 +173,7 @@ const Register = () => {
                     />
                   </FormControl>
                 </Box>
+
                 <Box>
                   <FormControl id="gender" isRequired>
                     <FormLabel>Gender</FormLabel>
@@ -208,68 +191,7 @@ const Register = () => {
                   </FormControl>
                 </Box>
               </HStack>
-              {/* <HStack>
-                <Box>
-                  <FormControl id="Phone" isRequired>
-                    <FormLabel>Phone Number</FormLabel>
-                    <Input
-                      type="number"
-                      name="phone"
-                      placeholder="Enter Phone Number"
-                      value={formData.phone}
-                      onChange={handleChange}
-                      required
-                    />
-                  </FormControl>
-                </Box>
-                <Box>
-                  <FormControl id="pincode" isRequired>
-                    <FormLabel>Pincode / ZIP</FormLabel>
-                    <Input
-                      type="text"
-                      name="pincode"
-                      placeholder="Enter Pincode"
-                      onChange={getPincodeData}
-                      required
-                    />
-                  </FormControl>
-                </Box>
-              </HStack>
-              <FormControl id="addess" isRequired>
-                <FormLabel>Address</FormLabel>
-                <Input
-                  type="text"
-                  name="address"
-                  placeholder="Enter Your Address"
-                  value={formData.address}
-                  onChange={handleChange}
-                  required
-                />
-              </FormControl>
-              <HStack>
-                <Box>
-                  <FormControl id="city" isRequired isReadOnly>
-                    <FormLabel>City</FormLabel>
-                    <Input
-                      type="text"
-                      name="city"
-                      placeholder="Waiting For Pincode"
-                      value={formData.city}
-                    />
-                  </FormControl>
-                </Box>
-                <Box>
-                  <FormControl id="state" isRequired isReadOnly>
-                    <FormLabel>State</FormLabel>
-                    <Input
-                      type="text"
-                      name="state"
-                      placeholder="Waiting For Pincode"
-                      value={formData.state}
-                    />
-                  </FormControl>
-                </Box>
-              </HStack> */}
+
               <FormControl id="email" isRequired>
                 <FormLabel>Email address</FormLabel>
                 <Input
@@ -281,6 +203,7 @@ const Register = () => {
                   required
                 />
               </FormControl>
+
               <FormControl id="password" isRequired>
                 <FormLabel>Password</FormLabel>
                 <InputGroup>
@@ -304,6 +227,7 @@ const Register = () => {
                   </InputRightElement>
                 </InputGroup>
               </FormControl>
+
               <Stack spacing={10} pt={2}>
                 {loading ? (
                   <Button
@@ -332,6 +256,7 @@ const Register = () => {
                   </Button>
                 )}
               </Stack>
+
               <Stack pt={3} display={"flex"}>
                 <Text
                   align={"center"}

@@ -140,6 +140,7 @@ const Admin = () => {
           <TabList
             position={"sticky"}
             top={20}
+            zIndex={50}
             borderBottom={"2px solid black"}
             paddingY={2}
             background={"transparent"}
@@ -178,8 +179,8 @@ const Admin = () => {
         <Box width={"100%"} gap={5}>
           <Box
             position={"sticky"}
-            top={20}
-            left={0}
+            zIndex={50}
+            top={{base:14,md:20}}
             borderBottom={"2px solid black"}
             paddingY={3}
             background={"transparent"}
