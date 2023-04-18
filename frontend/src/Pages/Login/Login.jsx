@@ -213,8 +213,8 @@ const Login = () => {
                 gap={"4px"}
                 alignItems={"center"}
               >
-                New User?
                 <Link to="/sign-up">
+                  New User?
                   <Text color={"#138CF1"} textDecoration={"underline"}>
                     Register
                   </Text>
