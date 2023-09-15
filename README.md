@@ -7,20 +7,20 @@ This is my PRD B-23 Project at Masai School's Full Stack Web Development Course.
 
 <h3>About My Site</h3>
 
-NewWave Fashion is a one stop shop for all your fashion and lifestyle needs. Being India's largest e-commerce store for fashion and lifestyle products, NewWave aims at providing a hassle free and enjoyable shopping experience to shoppers across the country with the widest range of brands and products on its portal.
+NewWave Fashion is a one-stop shop for all your fashion and lifestyle needs. Being India's largest e-commerce store for fashion and lifestyle products, NewWave aims to provide a hassle-free and enjoyable shopping experience to shoppers nationwide with the broadest range of brands and products on its portal.
 
 ##  Tech-stack used
   
    ```
-   Frontend : React JS, Chakra-UI
+   Frontend: React JS, Chakra-UI
    
-   State Management : Redux
+   State Management: Redux
    
-   Backend : Node JS, Express JS
+   Backend: Node JS, Express JS, Mongoose
    
-   DataBase   : MongoDB, Mongoose
+   Database: MongoDB
    
-   Deployment : Vercel
+   Deployment: Vercel
    ```
 ## Features
 
